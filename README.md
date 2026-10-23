@@ -63,13 +63,13 @@ C:\hospitality_MS/
 
 ## 🏃 Running the Application
 
-### 1. Start Backend (FastAPI)
+### 1. Start Backend (Django REST Framework)
 ```powershell
 cd C:\hospitality_MS\backend
-python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+python manage.py runserver 127.0.0.1:8000
 ```
-- **API URL:** `http://127.0.0.1:8000`
-- **Interactive Swagger Docs:** `http://127.0.0.1:8000/api/v1/docs`
+- **API URL:** `http://127.0.0.1:8000/api/v1/`
+- **Django Admin Panel:** `http://127.0.0.1:8000/admin/`
 
 ### 2. Start Frontend (React + Vite)
 ```powershell

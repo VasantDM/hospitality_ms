@@ -11,7 +11,8 @@ import {
   Clock, 
   CheckCircle, 
   Filter,
-  Sparkles
+  Sparkles,
+  PlusCircle
 } from 'lucide-react';
 import { reservationsAPI } from '../services/api';
 
@@ -79,15 +80,16 @@ export const Bookings = ({ onOpenNewBooking, setActiveTab, setSelectedFolioId })
       {/* Title & Actions */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
         <div>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: '700', margin: 0 }}>Guest Reservations & Front Desk</h2>
-          <p style={{ fontSize: '0.85rem', color: '#94A3B8', margin: '4px 0 0' }}>Manage guest check-ins, bookings, stay durations, and folios</p>
+          <h2 style={{ fontSize: '1.6rem', fontWeight: '800', margin: 0, color: '#1F2937' }}>Guest Reservations & Front Desk</h2>
+          <p style={{ fontSize: '0.86rem', color: '#6B7280', margin: '4px 0 0' }}>Manage guest check-ins, bookings, stay durations, and folios</p>
         </div>
-        <button onClick={onOpenNewBooking} className="btn-gold">
-          New Reservation
+        <button onClick={onOpenNewBooking} className="btn-amber">
+          <PlusCircle size={16} />
+          <span>New Reservation</span>
         </button>
       </div>
 
-      {/* Filter and Search Bar */}
+      {/* Filter and Search Bar - Pure Warm White Card */}
       <div className="glass-card" style={{ padding: '16px 20px', marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
         {/* Status Filter Buttons */}
         <div style={{ display: 'flex', gap: '8px' }}>
@@ -95,8 +97,8 @@ export const Bookings = ({ onOpenNewBooking, setActiveTab, setSelectedFolioId })
             <button
               key={st}
               onClick={() => setStatusFilter(st)}
-              className={statusFilter === st ? 'btn-gold' : 'btn-ghost'}
-              style={{ padding: '6px 14px', fontSize: '0.8rem', textTransform: 'capitalize' }}
+              className={statusFilter === st ? 'btn-amber' : 'btn-ghost'}
+              style={{ padding: '7px 14px', fontSize: '0.8rem', textTransform: 'capitalize' }}
             >
               {st.replace('_', ' ')}
             </button>
@@ -105,7 +107,7 @@ export const Bookings = ({ onOpenNewBooking, setActiveTab, setSelectedFolioId })
 
         {/* Search */}
         <div style={{ position: 'relative', width: '280px' }}>
-          <Search size={16} color="#64748B" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
+          <Search size={16} color="#6B7280" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
           <input 
             type="text" 
             placeholder="Search by code, guest name..."
@@ -117,18 +119,18 @@ export const Bookings = ({ onOpenNewBooking, setActiveTab, setSelectedFolioId })
         </div>
       </div>
 
-      {/* Bookings Table */}
+      {/* Bookings Table - Pure Warm White Container */}
       <div className="glass-card" style={{ overflow: 'hidden' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
           <thead>
-            <tr style={{ background: 'rgba(255, 255, 255, 0.03)', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', color: '#94A3B8', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              <th style={{ padding: '14px 20px' }}>Booking Code</th>
-              <th style={{ padding: '14px 20px' }}>Guest Details</th>
-              <th style={{ padding: '14px 20px' }}>Allocated Room(s)</th>
-              <th style={{ padding: '14px 20px' }}>Check-In / Out</th>
-              <th style={{ padding: '14px 20px' }}>Status</th>
-              <th style={{ padding: '14px 20px' }}>Folio Est.</th>
-              <th style={{ padding: '14px 20px', textAlign: 'right' }}>Actions</th>
+            <tr style={{ background: '#F8FAFD', borderBottom: '1px solid #E5E9F2', color: '#4B5563', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: '700' }}>
+              <th style={{ padding: '16px 20px' }}>Booking Code</th>
+              <th style={{ padding: '16px 20px' }}>Guest Details</th>
+              <th style={{ padding: '16px 20px' }}>Allocated Room(s)</th>
+              <th style={{ padding: '16px 20px' }}>Check-In / Out</th>
+              <th style={{ padding: '16px 20px' }}>Status</th>
+              <th style={{ padding: '16px 20px' }}>Folio Est.</th>
+              <th style={{ padding: '16px 20px', textAlign: 'right' }}>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -138,25 +140,25 @@ export const Bookings = ({ onOpenNewBooking, setActiveTab, setSelectedFolioId })
               const isConfirmed = res.status === 'confirmed';
 
               return (
-                <tr key={res.id} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)', transition: 'background 0.2s' }}>
+                <tr key={res.id} style={{ borderBottom: '1px solid #F1F5F9', transition: 'background 0.2s' }}>
                   <td style={{ padding: '16px 20px' }}>
-                    <span style={{ fontWeight: '700', color: '#D4AF37', letterSpacing: '0.04em' }}>
+                    <span style={{ fontWeight: '800', color: '#2D3A82', letterSpacing: '0.04em' }}>
                       {res.booking_code}
                     </span>
-                    <div style={{ fontSize: '0.72rem', color: '#64748B', marginTop: '2px' }}>
+                    <div style={{ fontSize: '0.74rem', color: '#6B7280', marginTop: '2px' }}>
                       via {res.source.replace('_', ' ')}
                     </div>
                   </td>
 
                   <td style={{ padding: '16px 20px' }}>
-                    <div style={{ fontWeight: '600', color: '#F8FAFC' }}>
+                    <div style={{ fontWeight: '700', color: '#1F2937' }}>
                       {res.guest?.first_name} {res.guest?.last_name}
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: '#94A3B8' }}>
+                    <div style={{ fontSize: '0.78rem', color: '#6B7280' }}>
                       {res.guest?.email} • {res.guest?.phone || 'No phone'}
                     </div>
                     {res.guest?.vip_status !== 'Standard' && (
-                      <span className="badge badge-gold" style={{ marginTop: '4px', fontSize: '0.65rem' }}>
+                      <span className="badge badge-amber" style={{ marginTop: '4px', fontSize: '0.65rem' }}>
                         {res.guest?.vip_status}
                       </span>
                     )}
@@ -165,20 +167,20 @@ export const Bookings = ({ onOpenNewBooking, setActiveTab, setSelectedFolioId })
                   <td style={{ padding: '16px 20px' }}>
                     {res.reservation_rooms?.map((rr) => (
                       <div key={rr.id} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <span style={{ fontWeight: '700', color: '#38BDF8' }}>#{rr.room?.room_number}</span>
-                        <span style={{ fontSize: '0.78rem', color: '#94A3B8' }}>({rr.room?.category?.name})</span>
+                        <span style={{ fontWeight: '800', color: '#2D3A82' }}>#{rr.room?.room_number}</span>
+                        <span style={{ fontSize: '0.78rem', color: '#4B5563' }}>({rr.room?.category?.name})</span>
                       </div>
                     ))}
-                    <div style={{ fontSize: '0.72rem', color: '#64748B' }}>
+                    <div style={{ fontSize: '0.74rem', color: '#6B7280' }}>
                       {res.adults} Adults, {res.children} Children
                     </div>
                   </td>
 
                   <td style={{ padding: '16px 20px' }}>
-                    <div style={{ fontSize: '0.82rem', color: '#CBD5E1' }}>
+                    <div style={{ fontSize: '0.84rem', color: '#1F2937', fontWeight: '600' }}>
                       {res.check_in_date}
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: '#64748B' }}>
+                    <div style={{ fontSize: '0.76rem', color: '#6B7280' }}>
                       to {res.check_out_date}
                     </div>
                   </td>
@@ -189,7 +191,7 @@ export const Bookings = ({ onOpenNewBooking, setActiveTab, setSelectedFolioId })
                     </span>
                   </td>
 
-                  <td style={{ padding: '16px 20px', fontWeight: '600', color: '#F8FAFC' }}>
+                  <td style={{ padding: '16px 20px', fontWeight: '700', color: '#1F2937' }}>
                     ${res.total_estimated?.toFixed(2)}
                   </td>
 
@@ -199,8 +201,8 @@ export const Bookings = ({ onOpenNewBooking, setActiveTab, setSelectedFolioId })
                         <button 
                           onClick={() => handleCheckIn(res.id)}
                           disabled={isLoading}
-                          className="btn-gold"
-                          style={{ padding: '6px 12px', fontSize: '0.78rem' }}
+                          className="btn-amber"
+                          style={{ padding: '7px 14px', fontSize: '0.8rem' }}
                         >
                           <LogIn size={13} />
                           <span>Check In</span>
@@ -212,7 +214,7 @@ export const Bookings = ({ onOpenNewBooking, setActiveTab, setSelectedFolioId })
                           onClick={() => handleCheckOut(res.id)}
                           disabled={isLoading}
                           className="btn-danger"
-                          style={{ padding: '6px 12px', fontSize: '0.78rem' }}
+                          style={{ padding: '7px 14px', fontSize: '0.8rem' }}
                         >
                           <LogOut size={13} />
                           <span>Check Out</span>
@@ -225,7 +227,7 @@ export const Bookings = ({ onOpenNewBooking, setActiveTab, setSelectedFolioId })
                           setActiveTab('billing');
                         }}
                         className="btn-ghost"
-                        style={{ padding: '6px 10px', fontSize: '0.78rem' }}
+                        style={{ padding: '7px 12px', fontSize: '0.8rem', color: '#2D3A82', borderColor: '#2D3A82' }}
                         title="View Guest Folio & Invoices"
                       >
                         <Receipt size={14} />

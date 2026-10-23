@@ -53,19 +53,18 @@ function AppContent() {
           top: '16px',
           right: '20px',
           zIndex: 100,
-          background: 'rgba(11, 15, 25, 0.9)',
-          backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(212, 175, 55, 0.4)',
+          background: 'linear-gradient(135deg, #2D3A82 0%, #1E275E 100%)',
+          border: '1px solid #E29578',
           borderRadius: '999px',
-          padding: '6px 16px',
-          boxShadow: '0 10px 25px rgba(0,0,0,0.6)'
+          padding: '8px 20px',
+          boxShadow: '0 8px 24px rgba(45, 58, 130, 0.35)'
         }}>
           <button 
             onClick={() => setActiveTab('dashboard')}
             style={{
               background: 'transparent',
               border: 'none',
-              color: '#D4AF37',
+              color: '#FFFFFF',
               fontWeight: '700',
               fontSize: '0.85rem',
               cursor: 'pointer',
@@ -74,7 +73,8 @@ function AppContent() {
               gap: '6px'
             }}
           >
-            <span>← Back to Staff PMS</span>
+            <span style={{ color: '#E29578' }}>←</span>
+            <span>Back to Staff PMS</span>
           </button>
         </div>
         <GuestPortal onBookingSuccess={handleBookingSuccess} />

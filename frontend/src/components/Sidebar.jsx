@@ -6,10 +6,7 @@ import {
   UtensilsCrossed, 
   Sparkles, 
   Receipt, 
-  BarChart3, 
   Globe, 
-  ShieldCheck, 
-  ChevronRight,
   Compass
 } from 'lucide-react';
 import { useAuth, DEMO_USERS } from '../context/AuthContext';
@@ -30,15 +27,16 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
 
   return (
     <aside style={{
-      background: 'linear-gradient(180deg, #0d1322 0%, #080c14 100%)',
-      borderRight: '1px solid rgba(255, 255, 255, 0.07)',
+      background: 'linear-gradient(180deg, #2D3A82 0%, #1E275E 100%)',
+      borderRight: '1px solid rgba(255, 255, 255, 0.1)',
       height: '100vh',
       display: 'flex',
       flexDirection: 'column',
       padding: '24px 18px',
       position: 'sticky',
       top: 0,
-      zIndex: 40
+      zIndex: 40,
+      boxShadow: '4px 0 20px rgba(45, 58, 130, 0.2)'
     }}>
       {/* Brand Logo */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '32px', paddingLeft: '8px' }}>
@@ -46,22 +44,23 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
           width: '42px',
           height: '42px',
           borderRadius: '12px',
-          background: 'linear-gradient(135deg, #D4AF37 0%, #996515 100%)',
+          background: 'linear-gradient(135deg, #E29578 0%, #D07F60 100%)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0 4px 15px rgba(212, 175, 55, 0.35)',
-          color: '#0B0F19',
+          boxShadow: '0 4px 14px rgba(226, 149, 120, 0.4)',
+          color: '#FFFFFF',
           fontWeight: '800',
-          fontSize: '1.2rem'
+          fontSize: '1.2rem',
+          letterSpacing: '0.05em'
         }}>
           GV
         </div>
         <div>
-          <h1 style={{ fontSize: '1.15rem', fontWeight: '700', letterSpacing: '0.02em', margin: 0 }} className="gold-gradient-text">
+          <h1 style={{ fontSize: '1.15rem', fontWeight: '800', letterSpacing: '0.04em', margin: 0, color: '#FFFFFF' }}>
             GRAND VISTA
           </h1>
-          <p style={{ fontSize: '0.72rem', color: '#94A3B8', margin: 0, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+          <p style={{ fontSize: '0.72rem', color: '#CBD5E1', margin: 0, letterSpacing: '0.06em', textTransform: 'uppercase', fontWeight: '500' }}>
             Resort & Hotel PMS
           </p>
         </div>
@@ -83,40 +82,44 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
                 padding: '11px 14px',
                 borderRadius: '10px',
                 border: isActive 
-                  ? '1px solid rgba(212, 175, 55, 0.35)' 
+                  ? '1px solid rgba(226, 149, 120, 0.6)' 
                   : item.highlight 
-                    ? '1px solid rgba(14, 165, 233, 0.25)' 
+                    ? '1px solid rgba(226, 149, 120, 0.4)' 
                     : '1px solid transparent',
                 background: isActive
-                  ? 'linear-gradient(90deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.03) 100%)'
+                  ? 'rgba(255, 255, 255, 0.16)'
                   : item.highlight 
-                    ? 'rgba(14, 165, 233, 0.06)' 
+                    ? 'rgba(226, 149, 120, 0.12)' 
                     : 'transparent',
                 color: isActive 
-                  ? '#D4AF37' 
+                  ? '#FFFFFF' 
                   : item.highlight 
-                    ? '#38BDF8' 
-                    : '#94A3B8',
-                fontWeight: isActive ? '600' : '500',
+                    ? '#FDF3EE' 
+                    : '#CBD5E1',
+                fontWeight: isActive ? '700' : '500',
                 fontSize: '0.9rem',
                 cursor: 'pointer',
                 textAlign: 'left',
                 transition: 'all 0.2s ease',
+                boxShadow: isActive ? '0 4px 12px rgba(0, 0, 0, 0.1)' : 'none'
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <Icon size={19} color={isActive ? '#D4AF37' : item.highlight ? '#38BDF8' : '#94A3B8'} />
+                <Icon 
+                  size={19} 
+                  color={isActive ? '#E29578' : item.highlight ? '#E29578' : '#CBD5E1'} 
+                />
                 <span>{item.label}</span>
               </div>
 
               {item.badge && (
                 <span style={{
                   fontSize: '0.68rem',
-                  padding: '2px 7px',
+                  padding: '2px 8px',
                   borderRadius: '999px',
-                  background: isActive ? 'rgba(212, 175, 55, 0.2)' : 'rgba(255, 255, 255, 0.07)',
-                  color: isActive ? '#F3E5AB' : '#94A3B8',
-                  fontWeight: '600'
+                  background: isActive ? '#E29578' : 'rgba(255, 255, 255, 0.14)',
+                  color: '#FFFFFF',
+                  fontWeight: '700'
                 }}>
                   {item.badge}
                 </span>
@@ -129,22 +132,23 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
       {/* Role Switcher Widget */}
       <div style={{
         marginTop: 'auto',
-        background: 'rgba(255, 255, 255, 0.03)',
-        border: '1px solid rgba(255, 255, 255, 0.07)',
+        background: 'rgba(255, 255, 255, 0.08)',
+        border: '1px solid rgba(255, 255, 255, 0.14)',
         borderRadius: '12px',
         padding: '14px',
+        backdropFilter: 'blur(6px)'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
           <img 
             src={currentUser.avatar} 
             alt={currentUser.name} 
-            style={{ width: '38px', height: '38px', borderRadius: '50%', objectFit: 'cover', border: '1px solid #D4AF37' }}
+            style={{ width: '38px', height: '38px', borderRadius: '50%', objectFit: 'cover', border: '2px solid #E29578' }}
           />
           <div style={{ flex: 1, overflow: 'hidden' }}>
-            <div style={{ fontSize: '0.86rem', fontWeight: '600', color: '#F8FAFC', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+            <div style={{ fontSize: '0.86rem', fontWeight: '700', color: '#FFFFFF', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
               {currentUser.name}
             </div>
-            <div style={{ fontSize: '0.72rem', color: '#D4AF37', textTransform: 'capitalize' }}>
+            <div style={{ fontSize: '0.72rem', color: '#E29578', fontWeight: '600', textTransform: 'capitalize' }}>
               {currentUser.title}
             </div>
           </div>
@@ -162,11 +166,11 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
                 padding: '4px 0',
                 textAlign: 'center',
                 borderRadius: '6px',
-                border: currentUser.role === user.role ? '1px solid #D4AF37' : '1px solid rgba(255, 255, 255, 0.06)',
-                background: currentUser.role === user.role ? 'rgba(212, 175, 55, 0.2)' : 'rgba(255, 255, 255, 0.02)',
-                color: currentUser.role === user.role ? '#D4AF37' : '#64748B',
+                border: currentUser.role === user.role ? '1px solid #E29578' : '1px solid rgba(255, 255, 255, 0.12)',
+                background: currentUser.role === user.role ? 'rgba(226, 149, 120, 0.35)' : 'rgba(255, 255, 255, 0.04)',
+                color: currentUser.role === user.role ? '#FFFFFF' : '#CBD5E1',
                 cursor: 'pointer',
-                fontWeight: '600',
+                fontWeight: '700',
                 textTransform: 'uppercase'
               }}
             >

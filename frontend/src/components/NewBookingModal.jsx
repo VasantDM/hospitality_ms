@@ -59,7 +59,7 @@ export const NewBookingModal = ({ isOpen, onClose, onSuccess, initialRoomId = nu
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!selectedRoomId) {
-      setError('Please select a room.');
+      setError('Please select an available room.');
       return;
     }
     setLoading(true);
@@ -101,40 +101,54 @@ export const NewBookingModal = ({ isOpen, onClose, onSuccess, initialRoomId = nu
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        {/* Header */}
+        {/* Header - Rich Indigo */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '20px 24px',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
+          background: 'linear-gradient(90deg, #2D3A82 0%, #1E275E 100%)',
+          color: '#FFFFFF',
+          borderTopLeftRadius: '18px',
+          borderTopRightRadius: '18px'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <Sparkles size={20} color="#D4AF37" />
-            <h3 style={{ fontSize: '1.2rem', fontWeight: '700', margin: 0 }} className="gold-gradient-text">
+            <Sparkles size={20} color="#E29578" />
+            <h3 style={{ fontSize: '1.2rem', fontWeight: '700', margin: 0, color: '#FFFFFF' }}>
               Create New Reservation & Walk-In
             </h3>
           </div>
           <button 
             onClick={onClose}
-            style={{ background: 'transparent', border: 'none', color: '#94A3B8', cursor: 'pointer' }}
+            style={{ 
+              background: 'rgba(255, 255, 255, 0.12)', 
+              border: 'none', 
+              color: '#FFFFFF', 
+              cursor: 'pointer',
+              width: '32px',
+              height: '32px',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
           >
-            <X size={20} />
+            <X size={18} />
           </button>
         </div>
 
-        {/* Form Body */}
-        <form onSubmit={handleSubmit} style={{ padding: '24px' }}>
+        {/* Form Body - Pure Warm White */}
+        <form onSubmit={handleSubmit} style={{ padding: '24px', background: '#FFFFFF' }}>
           {error && (
             <div style={{
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              background: 'rgba(244, 63, 94, 0.15)',
-              border: '1px solid rgba(244, 63, 94, 0.3)',
+              background: '#FEF2F2',
+              border: '1px solid #FCA5A5',
               borderRadius: '8px',
               padding: '10px 14px',
-              color: '#FB7185',
+              color: '#B91C1C',
               fontSize: '0.88rem',
               marginBottom: '16px'
             }}>
@@ -148,26 +162,26 @@ export const NewBookingModal = ({ isOpen, onClose, onSuccess, initialRoomId = nu
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              background: 'rgba(16, 185, 129, 0.15)',
-              border: '1px solid rgba(16, 185, 129, 0.3)',
+              background: '#ECFDF5',
+              border: '1px solid #6EE7B7',
               borderRadius: '8px',
               padding: '10px 14px',
-              color: '#34D399',
+              color: '#047857',
               fontSize: '0.88rem',
               marginBottom: '16px'
             }}>
               <CheckCircle2 size={17} />
-              <span>Reservation confirmed and Folio created successfully!</span>
+              <span>Reservation confirmed and Master Folio created successfully!</span>
             </div>
           )}
 
           {/* Guest Information Section */}
-          <h4 style={{ fontSize: '0.85rem', color: '#D4AF37', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>
+          <h4 style={{ fontSize: '0.85rem', color: '#2D3A82', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '12px', fontWeight: '800' }}>
             Guest Information
           </h4>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '14px' }}>
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>First Name *</label>
+              <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>First Name *</label>
               <input 
                 type="text" 
                 required 
@@ -178,7 +192,7 @@ export const NewBookingModal = ({ isOpen, onClose, onSuccess, initialRoomId = nu
               />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Last Name *</label>
+              <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Last Name *</label>
               <input 
                 type="text" 
                 required 
@@ -192,7 +206,7 @@ export const NewBookingModal = ({ isOpen, onClose, onSuccess, initialRoomId = nu
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '20px' }}>
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Email Address *</label>
+              <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Email Address *</label>
               <input 
                 type="email" 
                 required 
@@ -203,7 +217,7 @@ export const NewBookingModal = ({ isOpen, onClose, onSuccess, initialRoomId = nu
               />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Phone Number</label>
+              <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Phone Number</label>
               <input 
                 type="tel" 
                 placeholder="+1 (555) 000-0000" 
@@ -215,12 +229,12 @@ export const NewBookingModal = ({ isOpen, onClose, onSuccess, initialRoomId = nu
           </div>
 
           {/* Stay & Room Details */}
-          <h4 style={{ fontSize: '0.85rem', color: '#D4AF37', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>
+          <h4 style={{ fontSize: '0.85rem', color: '#2D3A82', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '12px', fontWeight: '800' }}>
             Stay & Room Allocation
           </h4>
 
           <div style={{ marginBottom: '14px' }}>
-            <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Select Available Room *</label>
+            <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Select Available Room *</label>
             <select 
               className="input-dark"
               value={selectedRoomId}
@@ -237,7 +251,7 @@ export const NewBookingModal = ({ isOpen, onClose, onSuccess, initialRoomId = nu
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '14px' }}>
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Check-In Date *</label>
+              <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Check-In Date *</label>
               <input 
                 type="date" 
                 required 
@@ -247,7 +261,7 @@ export const NewBookingModal = ({ isOpen, onClose, onSuccess, initialRoomId = nu
               />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Check-Out Date *</label>
+              <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Check-Out Date *</label>
               <input 
                 type="date" 
                 required 
@@ -260,7 +274,7 @@ export const NewBookingModal = ({ isOpen, onClose, onSuccess, initialRoomId = nu
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px', marginBottom: '16px' }}>
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Adults</label>
+              <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Adults</label>
               <input 
                 type="number" 
                 min="1" 
@@ -271,7 +285,7 @@ export const NewBookingModal = ({ isOpen, onClose, onSuccess, initialRoomId = nu
               />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Children</label>
+              <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Children</label>
               <input 
                 type="number" 
                 min="0" 
@@ -282,7 +296,7 @@ export const NewBookingModal = ({ isOpen, onClose, onSuccess, initialRoomId = nu
               />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Booking Channel</label>
+              <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Channel</label>
               <select className="input-dark" value={source} onChange={(e) => setSource(e.target.value)}>
                 <option value="walk_in">Walk-in Desk</option>
                 <option value="direct_web">Direct Website</option>
@@ -292,25 +306,25 @@ export const NewBookingModal = ({ isOpen, onClose, onSuccess, initialRoomId = nu
             </div>
           </div>
 
-          {/* Pricing Summary Card */}
+          {/* Pricing Summary Card - Pure Warm White with Muted Amber border */}
           <div style={{
-            background: 'rgba(212, 175, 55, 0.06)',
-            border: '1px solid rgba(212, 175, 55, 0.2)',
+            background: '#FDF3EE',
+            border: '1px solid rgba(226, 149, 120, 0.4)',
             borderRadius: '10px',
-            padding: '14px',
+            padding: '14px 18px',
             marginBottom: '20px'
           }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: '#94A3B8', marginBottom: '4px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: '#4B5563', marginBottom: '4px' }}>
               <span>{nights} Night(s) × ${ratePerNight}</span>
-              <span style={{ color: '#F8FAFC' }}>${roomTotal.toFixed(2)}</span>
+              <span style={{ color: '#1F2937', fontWeight: '600' }}>${roomTotal.toFixed(2)}</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: '#94A3B8', marginBottom: '8px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: '#4B5563', marginBottom: '8px' }}>
               <span>Resort Tax & Service Fee (12%)</span>
-              <span style={{ color: '#F8FAFC' }}>${tax.toFixed(2)}</span>
+              <span style={{ color: '#1F2937', fontWeight: '600' }}>${tax.toFixed(2)}</span>
             </div>
-            <div style={{ borderTop: '1px solid rgba(212, 175, 55, 0.2)', paddingTop: '8px', display: 'flex', justifyContent: 'space-between', fontWeight: '700' }}>
-              <span style={{ color: '#D4AF37' }}>Estimated Total:</span>
-              <span style={{ color: '#D4AF37', fontSize: '1.1rem' }}>${grandTotal.toFixed(2)}</span>
+            <div style={{ borderTop: '1px solid rgba(226, 149, 120, 0.3)', paddingTop: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ color: '#2D3A82', fontWeight: '700' }}>Estimated Total:</span>
+              <span style={{ color: '#E29578', fontSize: '1.25rem', fontWeight: '800' }}>${grandTotal.toFixed(2)}</span>
             </div>
           </div>
 
@@ -319,8 +333,8 @@ export const NewBookingModal = ({ isOpen, onClose, onSuccess, initialRoomId = nu
             <button type="button" onClick={onClose} className="btn-ghost">
               Cancel
             </button>
-            <button type="submit" disabled={loading} className="btn-gold">
-              {loading ? 'Creating...' : 'Confirm & Generate Folio'}
+            <button type="submit" disabled={loading} className="btn-amber">
+              {loading ? 'Creating...' : 'Confirm Reservation & Open Folio'}
             </button>
           </div>
         </form>

@@ -44,138 +44,139 @@ export const Dashboard = ({ setActiveTab, onOpenNewBooking }) => {
 
   if (loading) {
     return (
-      <div style={{ padding: '40px', textAlign: 'center', color: '#94A3B8' }}>
-        <Sparkles size={32} color="#D4AF37" className="animate-spin" style={{ margin: '0 auto 16px' }} />
-        <p>Loading Grand Vista Resort Intelligence...</p>
+      <div style={{ padding: '60px 20px', textAlign: 'center', color: '#6B7280' }}>
+        <Sparkles size={36} color="#2D3A82" className="animate-spin" style={{ margin: '0 auto 16px' }} />
+        <p style={{ fontSize: '1rem', fontWeight: '600', color: '#1F2937' }}>Loading Grand Vista Resort Intelligence...</p>
       </div>
     );
   }
 
   return (
     <div style={{ padding: '28px' }}>
-      {/* Welcome Banner */}
-      <div className="glass-card" style={{
-        padding: '24px 30px',
+      {/* Welcome Banner - Primary Card (Rich Indigo) */}
+      <div className="primary-card" style={{
+        padding: '28px 32px',
         marginBottom: '28px',
-        background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(19, 27, 46, 0.8) 100%)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        border: '1px solid rgba(212, 175, 55, 0.3)'
+        flexWrap: 'wrap',
+        gap: '20px'
       }}>
         <div>
-          <span style={{ fontSize: '0.8rem', color: '#D4AF37', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '700' }}>
+          <span style={{ fontSize: '0.8rem', color: '#E29578', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '800' }}>
             Executive Hospitality Dashboard
           </span>
-          <h2 style={{ fontSize: '1.6rem', fontWeight: '700', marginTop: '4px', marginBottom: '6px' }}>
-            Welcome to <span className="gold-gradient-text">Grand Vista Resort & Villas</span>
+          <h2 style={{ fontSize: '1.75rem', fontWeight: '800', marginTop: '6px', marginBottom: '8px', color: '#FFFFFF' }}>
+            Welcome to Grand Vista Resort & Villas
           </h2>
-          <p style={{ color: '#94A3B8', fontSize: '0.9rem', margin: 0 }}>
-            Property Status: <strong>{kpis?.occupied_rooms} Occupied</strong> • <strong>{kpis?.available_rooms} Available</strong> • <strong>{kpis?.dirty_rooms} Pending Cleaning</strong>
+          <p style={{ color: '#E2E8F0', fontSize: '0.92rem', margin: 0 }}>
+            Property Status: <strong style={{ color: '#FFFFFF' }}>{kpis?.occupied_rooms} Occupied</strong> • <strong style={{ color: '#FFFFFF' }}>{kpis?.available_rooms} Available</strong> • <strong style={{ color: '#FFFFFF' }}>{kpis?.dirty_rooms} Pending Cleaning</strong>
           </p>
         </div>
 
         <div style={{ display: 'flex', gap: '12px' }}>
-          <button onClick={() => setActiveTab('frontdesk')} className="btn-ghost">
+          <button onClick={() => setActiveTab('frontdesk')} className="btn-ghost-dark">
             View Room Matrix
           </button>
-          <button onClick={onOpenNewBooking} className="btn-gold">
-            Express Check-In
+          <button onClick={onOpenNewBooking} className="btn-amber">
+            <CalendarCheck size={16} />
+            <span>Express Check-In</span>
           </button>
         </div>
       </div>
 
-      {/* KPI Cards Grid */}
+      {/* KPI Cards Grid - Main Dashboard Cards (Pure Warm White) */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '18px', marginBottom: '28px' }}>
         {/* Occupancy Rate */}
-        <div className="glass-card" style={{ padding: '20px' }}>
+        <div className="glass-card" style={{ padding: '22px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-            <span style={{ fontSize: '0.82rem', color: '#94A3B8', fontWeight: '500' }}>Occupancy Rate</span>
-            <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(16, 185, 129, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{ fontSize: '0.82rem', color: '#6B7280', fontWeight: '600' }}>Occupancy Rate</span>
+            <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(16, 185, 129, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <TrendingUp size={18} color="#10B981" />
             </div>
           </div>
-          <div style={{ fontSize: '1.8rem', fontWeight: '800', color: '#F8FAFC' }}>
+          <div style={{ fontSize: '1.9rem', fontWeight: '800', color: '#1F2937' }}>
             {kpis?.occupancy_rate}%
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#34D399', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <div style={{ fontSize: '0.78rem', color: '#059669', marginTop: '6px', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: '600' }}>
             <ArrowUpRight size={14} />
             <span>+4.2% vs last week</span>
           </div>
         </div>
 
         {/* ADR (Average Daily Rate) */}
-        <div className="glass-card" style={{ padding: '20px' }}>
+        <div className="glass-card" style={{ padding: '22px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-            <span style={{ fontSize: '0.82rem', color: '#94A3B8', fontWeight: '500' }}>ADR (Avg Daily Rate)</span>
-            <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(212, 175, 55, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <DollarSign size={18} color="#D4AF37" />
+            <span style={{ fontSize: '0.82rem', color: '#6B7280', fontWeight: '600' }}>ADR (Avg Daily Rate)</span>
+            <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(45, 58, 130, 0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <DollarSign size={18} color="#2D3A82" />
             </div>
           </div>
-          <div style={{ fontSize: '1.8rem', fontWeight: '800', color: '#D4AF37' }}>
+          <div style={{ fontSize: '1.9rem', fontWeight: '800', color: '#2D3A82' }}>
             ${kpis?.adr}
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#94A3B8', marginTop: '4px' }}>
-            Target: $190.00
+          <div style={{ fontSize: '0.78rem', color: '#6B7280', marginTop: '6px' }}>
+            Monthly Target: $190.00
           </div>
         </div>
 
         {/* RevPAR */}
-        <div className="glass-card" style={{ padding: '20px' }}>
+        <div className="glass-card" style={{ padding: '22px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-            <span style={{ fontSize: '0.82rem', color: '#94A3B8', fontWeight: '500' }}>RevPAR</span>
-            <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(14, 165, 233, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <BedDouble size={18} color="#38BDF8" />
+            <span style={{ fontSize: '0.82rem', color: '#6B7280', fontWeight: '600' }}>RevPAR</span>
+            <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(226, 149, 120, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <BedDouble size={18} color="#E29578" />
             </div>
           </div>
-          <div style={{ fontSize: '1.8rem', fontWeight: '800', color: '#38BDF8' }}>
+          <div style={{ fontSize: '1.9rem', fontWeight: '800', color: '#E29578' }}>
             ${kpis?.revpar}
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#38BDF8', marginTop: '4px' }}>
+          <div style={{ fontSize: '0.78rem', color: '#6B7280', marginTop: '6px' }}>
             Revenue / Avail. Room
           </div>
         </div>
 
         {/* F&B Restaurant Sales */}
-        <div className="glass-card" style={{ padding: '20px' }}>
+        <div className="glass-card" style={{ padding: '22px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-            <span style={{ fontSize: '0.82rem', color: '#94A3B8', fontWeight: '500' }}>Dining & POS Today</span>
-            <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(245, 158, 11, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{ fontSize: '0.82rem', color: '#6B7280', fontWeight: '600' }}>Dining & POS Today</span>
+            <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(245, 158, 11, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Utensils size={18} color="#F59E0B" />
             </div>
           </div>
-          <div style={{ fontSize: '1.8rem', fontWeight: '800', color: '#FBBF24' }}>
+          <div style={{ fontSize: '1.9rem', fontWeight: '800', color: '#1F2937' }}>
             ${kpis?.restaurant_sales_today}
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#94A3B8', marginTop: '4px' }}>
-            F&B Master Folio Chargeable
+          <div style={{ fontSize: '0.78rem', color: '#6B7280', marginTop: '6px' }}>
+            Master Folio Direct Route
           </div>
         </div>
       </div>
 
-      {/* Middle Section: 7-Day Revenue Trend & Room Distribution */}
+      {/* Middle Section: 7-Day Revenue Trend & Room Distribution (Pure Warm White cards) */}
       <div style={{ display: 'grid', gridTemplateColumns: '2fr 1.2fr', gap: '24px', marginBottom: '28px' }}>
         {/* Revenue Breakdown */}
-        <div className="glass-card" style={{ padding: '24px' }}>
+        <div className="glass-card" style={{ padding: '26px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
             <div>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: '700', margin: 0 }}>7-Day Revenue Flow</h3>
-              <p style={{ fontSize: '0.8rem', color: '#94A3B8', margin: '2px 0 0' }}>Combined Room Tariffs & F&B POS Inflow</p>
+              <h3 style={{ fontSize: '1.15rem', fontWeight: '800', margin: 0, color: '#1F2937' }}>7-Day Revenue Flow</h3>
+              <p style={{ fontSize: '0.82rem', color: '#6B7280', margin: '3px 0 0' }}>Combined Room Tariffs & F&B POS Inflow</p>
             </div>
-            <div style={{ display: 'flex', gap: '12px', fontSize: '0.8rem' }}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '5px', color: '#D4AF37' }}>
-                <span style={{ width: '10px', height: '10px', background: '#D4AF37', borderRadius: '2px' }}></span>
+            <div style={{ display: 'flex', gap: '14px', fontSize: '0.82rem', fontWeight: '600' }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#2D3A82' }}>
+                <span style={{ width: '12px', height: '12px', background: '#2D3A82', borderRadius: '3px' }}></span>
                 Rooms
               </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '5px', color: '#38BDF8' }}>
-                <span style={{ width: '10px', height: '10px', background: '#38BDF8', borderRadius: '2px' }}></span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#E29578' }}>
+                <span style={{ width: '12px', height: '12px', background: '#E29578', borderRadius: '3px' }}></span>
                 Dining / Bar
               </span>
             </div>
           </div>
 
           {/* Bar Chart Visualization */}
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', height: '190px', paddingTop: '20px' }}>
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', height: '190px', paddingTop: '20px', borderBottom: '1px solid #E5E9F2' }}>
             {trends.map((t, idx) => {
               const maxVal = 2500;
               const roomH = Math.min(100, (t.room_revenue / maxVal) * 100);
@@ -183,134 +184,134 @@ export const Dashboard = ({ setActiveTab, onOpenNewBooking }) => {
 
               return (
                 <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', flex: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'flex-end', gap: '4px', height: '140px', width: '36px', justifyContent: 'center' }}>
-                    {/* Room Revenue Bar */}
+                  <div style={{ display: 'flex', alignItems: 'flex-end', gap: '5px', height: '140px', width: '38px', justifyContent: 'center' }}>
+                    {/* Room Revenue Bar - Rich Indigo */}
                     <div 
                       title={`Room Rev: $${t.room_revenue}`}
                       style={{ 
                         width: '14px', 
                         height: `${Math.max(12, roomH)}%`, 
-                        background: 'linear-gradient(180deg, #D4AF37 0%, #8B6914 100%)', 
+                        background: 'linear-gradient(180deg, #37469B 0%, #2D3A82 100%)', 
                         borderRadius: '4px 4px 0 0',
-                        boxShadow: '0 0 10px rgba(212, 175, 55, 0.2)'
+                        boxShadow: '0 2px 8px rgba(45, 58, 130, 0.2)'
                       }}
                     ></div>
-                    {/* F&B Revenue Bar */}
+                    {/* F&B Revenue Bar - Muted Amber */}
                     <div 
                       title={`F&B Rev: $${t.fnb_revenue}`}
                       style={{ 
                         width: '14px', 
                         height: `${Math.max(8, fnbH)}%`, 
-                        background: 'linear-gradient(180deg, #38BDF8 0%, #0369A1 100%)', 
+                        background: 'linear-gradient(180deg, #E8A186 0%, #E29578 100%)', 
                         borderRadius: '4px 4px 0 0',
-                        boxShadow: '0 0 10px rgba(14, 165, 233, 0.2)'
+                        boxShadow: '0 2px 8px rgba(226, 149, 120, 0.25)'
                       }}
                     ></div>
                   </div>
-                  <span style={{ fontSize: '0.72rem', color: '#94A3B8' }}>{t.date}</span>
+                  <span style={{ fontSize: '0.74rem', color: '#6B7280', fontWeight: '500' }}>{t.date}</span>
                 </div>
               );
             })}
           </div>
         </div>
 
-        {/* Live Inventory Status */}
-        <div className="glass-card" style={{ padding: '24px' }}>
-          <h3 style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '6px' }}>Room State Breakdown</h3>
-          <p style={{ fontSize: '0.8rem', color: '#94A3B8', marginBottom: '20px' }}>Total Capacity: {kpis?.total_rooms} Luxury Units</p>
+        {/* Live Inventory Status (Pure Warm White card) */}
+        <div className="glass-card" style={{ padding: '26px' }}>
+          <h3 style={{ fontSize: '1.15rem', fontWeight: '800', marginBottom: '6px', color: '#1F2937' }}>Room State Breakdown</h3>
+          <p style={{ fontSize: '0.82rem', color: '#6B7280', marginBottom: '20px' }}>Total Capacity: {kpis?.total_rooms} Luxury Units</p>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '6px' }}>
-                <span style={{ color: '#34D399', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ color: '#059669', display: 'flex', alignItems: 'center', gap: '6px', fontWeight: '600' }}>
                   <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10B981' }}></span>
                   Available Ready
                 </span>
-                <span style={{ fontWeight: '600' }}>{kpis?.available_rooms} Units</span>
+                <span style={{ fontWeight: '700', color: '#1F2937' }}>{kpis?.available_rooms} Units</span>
               </div>
-              <div style={{ height: '7px', background: 'rgba(255, 255, 255, 0.06)', borderRadius: '999px', overflow: 'hidden' }}>
+              <div style={{ height: '8px', background: '#F3F4F6', borderRadius: '999px', overflow: 'hidden' }}>
                 <div style={{ width: `${(kpis?.available_rooms / (kpis?.total_rooms || 1)) * 100}%`, height: '100%', background: '#10B981' }}></div>
               </div>
             </div>
 
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '6px' }}>
-                <span style={{ color: '#38BDF8', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#0EA5E9' }}></span>
+                <span style={{ color: '#2D3A82', display: 'flex', alignItems: 'center', gap: '6px', fontWeight: '600' }}>
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#2D3A82' }}></span>
                   Occupied Guests
                 </span>
-                <span style={{ fontWeight: '600' }}>{kpis?.occupied_rooms} Units</span>
+                <span style={{ fontWeight: '700', color: '#1F2937' }}>{kpis?.occupied_rooms} Units</span>
               </div>
-              <div style={{ height: '7px', background: 'rgba(255, 255, 255, 0.06)', borderRadius: '999px', overflow: 'hidden' }}>
-                <div style={{ width: `${(kpis?.occupied_rooms / (kpis?.total_rooms || 1)) * 100}%`, height: '100%', background: '#0EA5E9' }}></div>
+              <div style={{ height: '8px', background: '#F3F4F6', borderRadius: '999px', overflow: 'hidden' }}>
+                <div style={{ width: `${(kpis?.occupied_rooms / (kpis?.total_rooms || 1)) * 100}%`, height: '100%', background: '#2D3A82' }}></div>
               </div>
             </div>
 
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '6px' }}>
-                <span style={{ color: '#FBBF24', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ color: '#D97706', display: 'flex', alignItems: 'center', gap: '6px', fontWeight: '600' }}>
                   <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#F59E0B' }}></span>
                   Pending Housekeeping
                 </span>
-                <span style={{ fontWeight: '600' }}>{kpis?.dirty_rooms} Units</span>
+                <span style={{ fontWeight: '700', color: '#1F2937' }}>{kpis?.dirty_rooms} Units</span>
               </div>
-              <div style={{ height: '7px', background: 'rgba(255, 255, 255, 0.06)', borderRadius: '999px', overflow: 'hidden' }}>
+              <div style={{ height: '8px', background: '#F3F4F6', borderRadius: '999px', overflow: 'hidden' }}>
                 <div style={{ width: `${(kpis?.dirty_rooms / (kpis?.total_rooms || 1)) * 100}%`, height: '100%', background: '#F59E0B' }}></div>
               </div>
             </div>
 
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '6px' }}>
-                <span style={{ color: '#FB7185', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#F43F5E' }}></span>
+                <span style={{ color: '#DC2626', display: 'flex', alignItems: 'center', gap: '6px', fontWeight: '600' }}>
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#EF4444' }}></span>
                   Maintenance / OOO
                 </span>
-                <span style={{ fontWeight: '600' }}>{kpis?.maintenance_rooms} Units</span>
+                <span style={{ fontWeight: '700', color: '#1F2937' }}>{kpis?.maintenance_rooms} Units</span>
               </div>
-              <div style={{ height: '7px', background: 'rgba(255, 255, 255, 0.06)', borderRadius: '999px', overflow: 'hidden' }}>
-                <div style={{ width: `${(kpis?.maintenance_rooms / (kpis?.total_rooms || 1)) * 100}%`, height: '100%', background: '#F43F5E' }}></div>
+              <div style={{ height: '8px', background: '#F3F4F6', borderRadius: '999px', overflow: 'hidden' }}>
+                <div style={{ width: `${(kpis?.maintenance_rooms / (kpis?.total_rooms || 1)) * 100}%`, height: '100%', background: '#EF4444' }}></div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Quick Access Front Desk Highlights */}
-      <div className="glass-card" style={{ padding: '24px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
+      {/* Quick Access Front Desk Highlights (Pure Warm White card) */}
+      <div className="glass-card" style={{ padding: '26px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <div>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: '700', margin: 0 }}>Front Office Quick Monitor</h3>
-            <p style={{ fontSize: '0.8rem', color: '#94A3B8', margin: '2px 0 0' }}>Instant overview of prime resort units</p>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: '800', margin: 0, color: '#1F2937' }}>Front Office Quick Monitor</h3>
+            <p style={{ fontSize: '0.82rem', color: '#6B7280', margin: '3px 0 0' }}>Instant overview of prime resort units</p>
           </div>
-          <button onClick={() => setActiveTab('frontdesk')} className="btn-ghost" style={{ fontSize: '0.82rem', padding: '6px 12px' }}>
+          <button onClick={() => setActiveTab('frontdesk')} className="btn-ghost" style={{ fontSize: '0.82rem', padding: '6px 14px' }}>
             Open Full Grid
           </button>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(170px, 1fr))', gap: '14px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '14px' }}>
           {rooms.slice(0, 8).map((room) => (
             <div 
               key={room.id}
               className="glass-card glass-card-interactive"
               style={{
-                padding: '14px',
+                padding: '16px',
                 borderLeft: room.status === 'occupied' 
-                  ? '3px solid #38BDF8' 
+                  ? '4px solid #2D3A82' 
                   : room.status === 'available' 
-                    ? '3px solid #34D399' 
-                    : '3px solid #FB7185'
+                    ? '4px solid #10B981' 
+                    : '4px solid #EF4444'
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                <span style={{ fontWeight: '700', fontSize: '1.05rem', color: '#F8FAFC' }}>#{room.room_number}</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                <span style={{ fontWeight: '800', fontSize: '1.1rem', color: '#1F2937' }}>#{room.room_number}</span>
                 <span className={`badge badge-${room.status}`}>
                   {room.status}
                 </span>
               </div>
-              <div style={{ fontSize: '0.78rem', color: '#94A3B8', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              <div style={{ fontSize: '0.8rem', color: '#4B5563', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', fontWeight: '500' }}>
                 {room.category?.name}
               </div>
-              <div style={{ fontSize: '0.72rem', color: '#D4AF37', marginTop: '6px' }}>
+              <div style={{ fontSize: '0.78rem', color: '#E29578', marginTop: '8px', fontWeight: '700' }}>
                 ${room.category?.base_price} / night
               </div>
             </div>

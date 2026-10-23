@@ -8,7 +8,7 @@ import {
   DollarSign, 
   Calendar, 
   User, 
-  ShieldCheck,
+  ShieldCheck, 
   FileText
 } from 'lucide-react';
 import { foliosAPI, reservationsAPI } from '../services/api';
@@ -114,15 +114,15 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
       {/* Top Controls */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
         <div>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: '700', margin: 0 }}>Master Folio & Invoicing</h2>
-          <p style={{ fontSize: '0.85rem', color: '#94A3B8', margin: '4px 0 0' }}>Central guest financial ledger, room/restaurant itemization, and tax invoice</p>
+          <h2 style={{ fontSize: '1.6rem', fontWeight: '800', margin: 0, color: '#1F2937' }}>Master Folio & Invoicing</h2>
+          <p style={{ fontSize: '0.86rem', color: '#6B7280', margin: '4px 0 0' }}>Central guest financial ledger, room/restaurant itemization, and tax invoice</p>
         </div>
 
         {/* Reservation Selector */}
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
           <select 
             className="input-dark"
-            style={{ width: '280px', height: '38px', fontSize: '0.85rem' }}
+            style={{ width: '300px', height: '40px', fontSize: '0.85rem' }}
             value={selectedResId}
             onChange={(e) => setSelectedResId(e.target.value)}
           >
@@ -141,28 +141,28 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
       </div>
 
       {currentFolio && activeRes ? (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: '24px' }}>
-          {/* Left: Folio Itemized Statement */}
-          <div className="glass-card" style={{ padding: '26px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '24px' }}>
+          {/* Left: Folio Itemized Statement - Pure Warm White Card */}
+          <div className="glass-card" style={{ padding: '28px' }}>
             {/* Invoice Header */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: '20px', marginBottom: '20px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #E5E9F2', paddingBottom: '22px', marginBottom: '22px' }}>
               <div>
-                <span className="gold-gradient-text" style={{ fontSize: '1.3rem', fontWeight: '800' }}>
+                <span style={{ fontSize: '1.35rem', fontWeight: '800', color: '#2D3A82' }}>
                   GRAND VISTA RESORT & SPA
                 </span>
-                <p style={{ fontSize: '0.78rem', color: '#94A3B8', margin: '4px 0 0' }}>
-                  100 Ocean Crest Blvd, Paradise Coast • GSTIN: 29AAAAA0000A1Z5
+                <p style={{ fontSize: '0.8rem', color: '#6B7280', margin: '4px 0 0' }}>
+                  100 Ocean Crest Blvd, Paradise Coast • Tax ID / GSTIN: 29AAAAA0000A1Z5
                 </p>
               </div>
 
               <div style={{ textAlign: 'right' }}>
-                <div style={{ fontSize: '1.1rem', fontWeight: '700', color: '#F8FAFC' }}>
+                <div style={{ fontSize: '1.15rem', fontWeight: '800', color: '#1F2937' }}>
                   FOLIO #{currentFolio.id}
                 </div>
-                <div style={{ fontSize: '0.8rem', color: '#D4AF37', fontWeight: '600' }}>
+                <div style={{ fontSize: '0.82rem', color: '#E29578', fontWeight: '700' }}>
                   Booking: {activeRes.booking_code}
                 </div>
-                <span className={`badge badge-${currentFolio.status === 'settled' ? 'available' : 'dirty'}`} style={{ marginTop: '4px' }}>
+                <span className={`badge badge-${currentFolio.status === 'settled' ? 'available' : 'dirty'}`} style={{ marginTop: '6px' }}>
                   {currentFolio.status.toUpperCase()}
                 </span>
               </div>
@@ -170,107 +170,107 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
 
             {/* Guest Summary Banner */}
             <div style={{
-              background: 'rgba(255, 255, 255, 0.02)',
-              border: '1px solid rgba(255, 255, 255, 0.06)',
+              background: '#F8FAFD',
+              border: '1px solid #E5E9F2',
               borderRadius: '10px',
-              padding: '14px 18px',
-              marginBottom: '20px',
+              padding: '16px 20px',
+              marginBottom: '22px',
               display: 'grid',
               gridTemplateColumns: 'repeat(3, 1fr)',
               gap: '14px',
-              fontSize: '0.82rem'
+              fontSize: '0.84rem'
             }}>
               <div>
-                <span style={{ color: '#64748B', display: 'block' }}>Guest Name:</span>
-                <strong style={{ color: '#F8FAFC' }}>{activeRes.guest?.first_name} {activeRes.guest?.last_name}</strong>
+                <span style={{ color: '#6B7280', display: 'block', fontSize: '0.76rem', textTransform: 'uppercase', fontWeight: '600' }}>Guest Name:</span>
+                <strong style={{ color: '#1F2937' }}>{activeRes.guest?.first_name} {activeRes.guest?.last_name}</strong>
               </div>
               <div>
-                <span style={{ color: '#64748B', display: 'block' }}>Stay Period:</span>
-                <strong style={{ color: '#F8FAFC' }}>{activeRes.check_in_date} to {activeRes.check_out_date}</strong>
+                <span style={{ color: '#6B7280', display: 'block', fontSize: '0.76rem', textTransform: 'uppercase', fontWeight: '600' }}>Stay Period:</span>
+                <strong style={{ color: '#1F2937' }}>{activeRes.check_in_date} to {activeRes.check_out_date}</strong>
               </div>
               <div>
-                <span style={{ color: '#64748B', display: 'block' }}>ID / Passport:</span>
-                <strong style={{ color: '#F8FAFC' }}>{activeRes.guest?.id_proof_number || 'US98320491'}</strong>
+                <span style={{ color: '#6B7280', display: 'block', fontSize: '0.76rem', textTransform: 'uppercase', fontWeight: '600' }}>ID / Passport:</span>
+                <strong style={{ color: '#1F2937' }}>{activeRes.guest?.id_proof_number || 'US98320491'}</strong>
               </div>
             </div>
 
             {/* Charges Table */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-              <h4 style={{ fontSize: '0.95rem', fontWeight: '700', margin: 0, color: '#F8FAFC' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+              <h4 style={{ fontSize: '1rem', fontWeight: '800', margin: 0, color: '#1F2937' }}>
                 Itemized Debits & Charges
               </h4>
-              <button onClick={() => setShowAddCharge(true)} className="btn-ghost" style={{ fontSize: '0.78rem', padding: '5px 10px' }}>
-                <Plus size={14} /> Add Incidentals
+              <button onClick={() => setShowAddCharge(true)} className="btn-ghost" style={{ fontSize: '0.8rem', padding: '6px 12px' }}>
+                <Plus size={14} color="#2D3A82" /> <span>Add Incidentals</span>
               </button>
             </div>
 
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem', marginBottom: '24px' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem', marginBottom: '28px' }}>
               <thead>
-                <tr style={{ background: 'rgba(255, 255, 255, 0.04)', color: '#94A3B8', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
-                  <th style={{ padding: '10px 14px' }}>Description</th>
-                  <th style={{ padding: '10px 14px' }}>Category</th>
-                  <th style={{ padding: '10px 14px' }}>Qty</th>
-                  <th style={{ padding: '10px 14px', textAlign: 'right' }}>Total</th>
+                <tr style={{ background: '#F8FAFD', color: '#4B5563', borderBottom: '1px solid #E5E9F2', fontSize: '0.78rem', textTransform: 'uppercase', fontWeight: '700' }}>
+                  <th style={{ padding: '12px 16px' }}>Description</th>
+                  <th style={{ padding: '12px 16px' }}>Category</th>
+                  <th style={{ padding: '12px 16px' }}>Qty</th>
+                  <th style={{ padding: '12px 16px', textAlign: 'right' }}>Total</th>
                 </tr>
               </thead>
               <tbody>
                 {currentFolio.items?.map(item => (
-                  <tr key={item.id} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.04)' }}>
-                    <td style={{ padding: '12px 14px', color: '#F8FAFC', fontWeight: '500' }}>{item.description}</td>
-                    <td style={{ padding: '12px 14px', color: '#94A3B8', textTransform: 'capitalize' }}>{item.category.replace('_', ' ')}</td>
-                    <td style={{ padding: '12px 14px', color: '#94A3B8' }}>{item.quantity}</td>
-                    <td style={{ padding: '12px 14px', textAlign: 'right', fontWeight: '600', color: '#D4AF37' }}>${item.total_amount.toFixed(2)}</td>
+                  <tr key={item.id} style={{ borderBottom: '1px solid #F1F5F9' }}>
+                    <td style={{ padding: '14px 16px', color: '#1F2937', fontWeight: '600' }}>{item.description}</td>
+                    <td style={{ padding: '14px 16px', color: '#6B7280', textTransform: 'capitalize' }}>{item.category.replace('_', ' ')}</td>
+                    <td style={{ padding: '14px 16px', color: '#6B7280' }}>{item.quantity}</td>
+                    <td style={{ padding: '14px 16px', textAlign: 'right', fontWeight: '700', color: '#2D3A82' }}>${item.total_amount.toFixed(2)}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
 
             {/* Payments Record Table */}
-            <h4 style={{ fontSize: '0.95rem', fontWeight: '700', margin: '0 0 12px 0', color: '#F8FAFC' }}>
+            <h4 style={{ fontSize: '1rem', fontWeight: '800', margin: '0 0 14px 0', color: '#1F2937' }}>
               Recorded Credits & Payments
             </h4>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
               <thead>
-                <tr style={{ background: 'rgba(255, 255, 255, 0.04)', color: '#94A3B8', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
-                  <th style={{ padding: '10px 14px' }}>Method</th>
-                  <th style={{ padding: '10px 14px' }}>Reference #</th>
-                  <th style={{ padding: '10px 14px' }}>Notes</th>
-                  <th style={{ padding: '10px 14px', textAlign: 'right' }}>Amount Paid</th>
+                <tr style={{ background: '#F8FAFD', color: '#4B5563', borderBottom: '1px solid #E5E9F2', fontSize: '0.78rem', textTransform: 'uppercase', fontWeight: '700' }}>
+                  <th style={{ padding: '12px 16px' }}>Method</th>
+                  <th style={{ padding: '12px 16px' }}>Reference #</th>
+                  <th style={{ padding: '12px 16px' }}>Notes</th>
+                  <th style={{ padding: '12px 16px', textAlign: 'right' }}>Amount Paid</th>
                 </tr>
               </thead>
               <tbody>
                 {currentFolio.payments?.map(pay => (
-                  <tr key={pay.id} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.04)' }}>
-                    <td style={{ padding: '10px 14px', color: '#34D399', fontWeight: '600', textTransform: 'capitalize' }}>
+                  <tr key={pay.id} style={{ borderBottom: '1px solid #F1F5F9' }}>
+                    <td style={{ padding: '12px 16px', color: '#059669', fontWeight: '700', textTransform: 'capitalize' }}>
                       ✓ {pay.payment_method.replace('_', ' ')}
                     </td>
-                    <td style={{ padding: '10px 14px', color: '#94A3B8' }}>{pay.transaction_ref || 'N/A'}</td>
-                    <td style={{ padding: '10px 14px', color: '#64748B' }}>{pay.notes || '-'}</td>
-                    <td style={{ padding: '10px 14px', textAlign: 'right', fontWeight: '600', color: '#34D399' }}>${pay.amount.toFixed(2)}</td>
+                    <td style={{ padding: '12px 16px', color: '#6B7280' }}>{pay.transaction_ref || 'N/A'}</td>
+                    <td style={{ padding: '12px 16px', color: '#6B7280' }}>{pay.notes || '-'}</td>
+                    <td style={{ padding: '12px 16px', textAlign: 'right', fontWeight: '700', color: '#059669' }}>${pay.amount.toFixed(2)}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          {/* Right: Folio Balance & Settlement Card */}
-          <div className="glass-card" style={{ padding: '24px', height: 'fit-content' }}>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '18px', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: '10px' }}>
+          {/* Right: Folio Balance & Settlement Card - Pure Warm White Container */}
+          <div className="glass-card" style={{ padding: '26px', height: 'fit-content' }}>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: '800', marginBottom: '20px', borderBottom: '1px solid #E5E9F2', paddingBottom: '12px', color: '#1F2937' }}>
               Folio Settlement Summary
             </h3>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '20px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.88rem', color: '#94A3B8' }}>
-                <span>Gross Charges:</span>
-                <span style={{ color: '#F8FAFC', fontWeight: '600' }}>${currentFolio.total_charges.toFixed(2)}</span>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '24px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', color: '#4B5563' }}>
+                <span>Gross Debits:</span>
+                <span style={{ color: '#1F2937', fontWeight: '700' }}>${currentFolio.total_charges.toFixed(2)}</span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.88rem', color: '#94A3B8' }}>
-                <span>Total Payments:</span>
-                <span style={{ color: '#34D399', fontWeight: '600' }}>-${currentFolio.total_payments.toFixed(2)}</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', color: '#4B5563' }}>
+                <span>Total Credits:</span>
+                <span style={{ color: '#059669', fontWeight: '700' }}>-${currentFolio.total_payments.toFixed(2)}</span>
               </div>
-              <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '1rem', fontWeight: '700', color: '#F8FAFC' }}>Balance Due:</span>
-                <span style={{ fontSize: '1.4rem', fontWeight: '800', color: currentFolio.balance_due > 0 ? '#FB7185' : '#34D399' }}>
+              <div style={{ borderTop: '1px solid #E5E9F2', paddingTop: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontSize: '1.05rem', fontWeight: '800', color: '#1F2937' }}>Balance Due:</span>
+                <span style={{ fontSize: '1.5rem', fontWeight: '800', color: currentFolio.balance_due > 0 ? '#DC2626' : '#059669' }}>
                   ${currentFolio.balance_due.toFixed(2)}
                 </span>
               </div>
@@ -279,7 +279,7 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
             {currentFolio.balance_due > 0 ? (
               <button 
                 onClick={() => setShowPaymentModal(true)} 
-                className="btn-gold" 
+                className="btn-amber" 
                 style={{ width: '100%', padding: '12px' }}
               >
                 <CreditCard size={16} />
@@ -287,14 +287,14 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
               </button>
             ) : (
               <div style={{
-                background: 'rgba(16, 185, 129, 0.15)',
-                border: '1px solid rgba(16, 185, 129, 0.3)',
+                background: '#ECFDF5',
+                border: '1px solid #6EE7B7',
                 borderRadius: '8px',
-                padding: '12px',
+                padding: '14px',
                 textAlign: 'center',
-                color: '#34D399',
-                fontSize: '0.88rem',
-                fontWeight: '600'
+                color: '#047857',
+                fontSize: '0.9rem',
+                fontWeight: '700'
               }}>
                 ✓ Folio Fully Settled & Balanced
               </div>
@@ -302,19 +302,25 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
           </div>
         </div>
       ) : (
-        <p style={{ color: '#94A3B8' }}>Select a reservation above to load its guest folio.</p>
+        <p style={{ color: '#6B7280' }}>Select a reservation above to load its guest folio.</p>
       )}
 
       {/* Add Incidental Charge Modal */}
       {showAddCharge && (
         <div className="modal-overlay" onClick={() => setShowAddCharge(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '440px' }}>
-            <div style={{ padding: '20px 24px', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
-              <h3 style={{ margin: 0, fontSize: '1.2rem' }} className="gold-gradient-text">Post Incidental Charge</h3>
+            <div style={{ 
+              padding: '20px 24px', 
+              background: 'linear-gradient(90deg, #2D3A82 0%, #1E275E 100%)',
+              color: '#FFFFFF',
+              borderTopLeftRadius: '18px',
+              borderTopRightRadius: '18px'
+            }}>
+              <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#FFFFFF', fontWeight: '800' }}>Post Incidental Charge</h3>
             </div>
-            <form onSubmit={handleAddCharge} style={{ padding: '24px' }}>
+            <form onSubmit={handleAddCharge} style={{ padding: '24px', background: '#FFFFFF' }}>
               <div style={{ marginBottom: '14px' }}>
-                <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Charge Description *</label>
+                <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Charge Description *</label>
                 <input 
                   type="text" 
                   required 
@@ -325,9 +331,9 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
                 />
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '20px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '22px' }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Category</label>
+                  <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Category</label>
                   <select className="input-dark" value={chargeCategory} onChange={(e) => setChargeCategory(e.target.value)}>
                     <option value="spa">Spa & Wellness</option>
                     <option value="laundry">Laundry</option>
@@ -337,7 +343,7 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
                   </select>
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Amount ($) *</label>
+                  <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Amount ($) *</label>
                   <input 
                     type="number" 
                     step="0.01" 
@@ -350,9 +356,9 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
                 </div>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
                 <button type="button" onClick={() => setShowAddCharge(false)} className="btn-ghost">Cancel</button>
-                <button type="submit" className="btn-gold">Post to Folio</button>
+                <button type="submit" className="btn-amber">Post to Folio</button>
               </div>
             </form>
           </div>
@@ -363,12 +369,18 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
       {showPaymentModal && (
         <div className="modal-overlay" onClick={() => setShowPaymentModal(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '440px' }}>
-            <div style={{ padding: '20px 24px', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
-              <h3 style={{ margin: 0, fontSize: '1.2rem' }} className="gold-gradient-text">Receive Folio Payment</h3>
+            <div style={{ 
+              padding: '20px 24px', 
+              background: 'linear-gradient(90deg, #2D3A82 0%, #1E275E 100%)',
+              color: '#FFFFFF',
+              borderTopLeftRadius: '18px',
+              borderTopRightRadius: '18px'
+            }}>
+              <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#FFFFFF', fontWeight: '800' }}>Receive Folio Payment</h3>
             </div>
-            <form onSubmit={handleProcessPayment} style={{ padding: '24px' }}>
+            <form onSubmit={handleProcessPayment} style={{ padding: '24px', background: '#FFFFFF' }}>
               <div style={{ marginBottom: '14px' }}>
-                <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Amount to Collect ($) *</label>
+                <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Amount to Collect ($) *</label>
                 <input 
                   type="number" 
                   step="0.01" 
@@ -380,7 +392,7 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
               </div>
 
               <div style={{ marginBottom: '14px' }}>
-                <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Payment Method</label>
+                <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Payment Method</label>
                 <select className="input-dark" value={payMethod} onChange={(e) => setPayMethod(e.target.value)}>
                   <option value="credit_card">Credit / Debit Card (Stripe Terminal)</option>
                   <option value="cash">Cash Counter</option>
@@ -389,8 +401,8 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
                 </select>
               </div>
 
-              <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Card / Bank Reference</label>
+              <div style={{ marginBottom: '22px' }}>
+                <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Card / Bank Reference</label>
                 <input 
                   type="text" 
                   placeholder="e.g. AUTH-VISA-88219" 
@@ -400,9 +412,9 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
                 />
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
                 <button type="button" onClick={() => setShowPaymentModal(false)} className="btn-ghost">Cancel</button>
-                <button type="submit" className="btn-emerald">Confirm & Print Receipt</button>
+                <button type="submit" className="btn-amber">Confirm & Settle</button>
               </div>
             </form>
           </div>

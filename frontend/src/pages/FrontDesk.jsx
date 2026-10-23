@@ -11,7 +11,8 @@ import {
   Receipt,
   User,
   Calendar,
-  Layers
+  Layers,
+  CalendarCheck
 } from 'lucide-react';
 import { roomsAPI, reservationsAPI, foliosAPI } from '../services/api';
 
@@ -64,18 +65,18 @@ export const FrontDesk = ({ onOpenNewBookingWithRoom, setActiveTab, setSelectedF
       {/* Title & Filters */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
         <div>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: '700', margin: 0 }}>Front Office Room Matrix</h2>
-          <p style={{ fontSize: '0.85rem', color: '#94A3B8', margin: '4px 0 0' }}>Real-time inventory grid and express check-in / check-out dispatch</p>
+          <h2 style={{ fontSize: '1.6rem', fontWeight: '800', margin: 0, color: '#1F2937' }}>Front Office Room Matrix</h2>
+          <p style={{ fontSize: '0.86rem', color: '#6B7280', margin: '4px 0 0' }}>Real-time inventory grid and express check-in / check-out dispatch</p>
         </div>
 
         {/* Status Filters */}
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
           {['All', 'available', 'occupied', 'dirty', 'out_of_order'].map((st) => (
             <button
               key={st}
               onClick={() => setStatusFilter(st)}
-              className={statusFilter === st ? 'btn-gold' : 'btn-ghost'}
-              style={{ padding: '6px 14px', fontSize: '0.8rem', textTransform: 'capitalize' }}
+              className={statusFilter === st ? 'btn-amber' : 'btn-ghost'}
+              style={{ padding: '7px 14px', fontSize: '0.8rem', textTransform: 'capitalize' }}
             >
               {st === 'dirty' ? 'Pending Clean' : st.replace('_', ' ')}
             </button>
@@ -84,21 +85,23 @@ export const FrontDesk = ({ onOpenNewBookingWithRoom, setActiveTab, setSelectedF
       </div>
 
       {/* Zone Selector Tabs */}
-      <div style={{ display: 'flex', gap: '8px', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: '12px', marginBottom: '24px', overflowX: 'auto' }}>
+      <div style={{ display: 'flex', gap: '10px', borderBottom: '1px solid #E5E9F2', paddingBottom: '14px', marginBottom: '24px', overflowX: 'auto' }}>
         {zones.map((zone) => (
           <button
             key={zone}
             onClick={() => setSelectedZone(zone)}
             style={{
-              background: selectedZone === zone ? 'rgba(212, 175, 55, 0.15)' : 'transparent',
-              border: selectedZone === zone ? '1px solid #D4AF37' : '1px solid transparent',
-              color: selectedZone === zone ? '#D4AF37' : '#94A3B8',
-              padding: '8px 16px',
+              background: selectedZone === zone ? '#2D3A82' : '#FFFFFF',
+              border: selectedZone === zone ? '1px solid #2D3A82' : '1px solid #E5E7EB',
+              color: selectedZone === zone ? '#FFFFFF' : '#4B5563',
+              padding: '8px 18px',
               borderRadius: '8px',
               fontSize: '0.88rem',
               fontWeight: '600',
               cursor: 'pointer',
-              whiteSpace: 'nowrap'
+              whiteSpace: 'nowrap',
+              boxShadow: selectedZone === zone ? '0 4px 12px rgba(45, 58, 130, 0.25)' : 'none',
+              transition: 'all 0.2s ease'
             }}
           >
             {zone}
@@ -106,7 +109,7 @@ export const FrontDesk = ({ onOpenNewBookingWithRoom, setActiveTab, setSelectedF
         ))}
       </div>
 
-      {/* Interactive Room Grid */}
+      {/* Interactive Room Grid - Pure Warm White Cards */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
         {filteredRooms.map((room) => {
           const isOccupied = room.status === 'occupied';
@@ -119,14 +122,14 @@ export const FrontDesk = ({ onOpenNewBookingWithRoom, setActiveTab, setSelectedF
               key={room.id}
               className="glass-card glass-card-interactive"
               style={{
-                padding: '20px',
+                padding: '22px',
                 borderTop: isOccupied 
-                  ? '4px solid #38BDF8' 
+                  ? '4px solid #2D3A82' 
                   : isAvailable && !isDirty 
                     ? '4px solid #10B981' 
                     : isDirty 
                       ? '4px solid #F59E0B' 
-                      : '4px solid #F43F5E',
+                      : '4px solid #EF4444',
                 position: 'relative'
               }}
             >
@@ -134,13 +137,13 @@ export const FrontDesk = ({ onOpenNewBookingWithRoom, setActiveTab, setSelectedF
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <div style={{
-                    fontSize: '1.25rem',
+                    fontSize: '1.3rem',
                     fontWeight: '800',
-                    color: '#F8FAFC'
+                    color: '#1F2937'
                   }}>
                     #{room.room_number}
                   </div>
-                  <span style={{ fontSize: '0.75rem', color: '#64748B' }}>Floor {room.floor}</span>
+                  <span style={{ fontSize: '0.78rem', color: '#6B7280', fontWeight: '500' }}>Floor {room.floor}</span>
                 </div>
 
                 <div style={{ display: 'flex', gap: '6px' }}>
@@ -152,10 +155,10 @@ export const FrontDesk = ({ onOpenNewBookingWithRoom, setActiveTab, setSelectedF
 
               {/* Room Category & Features */}
               <div style={{ marginBottom: '14px' }}>
-                <h4 style={{ fontSize: '0.95rem', fontWeight: '600', color: '#F8FAFC', margin: 0 }}>
+                <h4 style={{ fontSize: '0.98rem', fontWeight: '700', color: '#1F2937', margin: 0 }}>
                   {room.category?.name}
                 </h4>
-                <p style={{ fontSize: '0.78rem', color: '#94A3B8', margin: '4px 0 0' }}>
+                <p style={{ fontSize: '0.8rem', color: '#6B7280', margin: '4px 0 0' }}>
                   {room.zone} • {room.category?.bed_type}
                 </p>
               </div>
@@ -165,16 +168,17 @@ export const FrontDesk = ({ onOpenNewBookingWithRoom, setActiveTab, setSelectedF
                 display: 'flex', 
                 alignItems: 'center', 
                 justifyContent: 'space-between',
-                background: 'rgba(255, 255, 255, 0.03)',
+                background: '#F8FAFD',
+                border: '1px solid #E5E9F2',
                 padding: '8px 12px',
                 borderRadius: '8px',
-                marginBottom: '16px',
-                fontSize: '0.8rem'
+                marginBottom: '18px',
+                fontSize: '0.82rem'
               }}>
-                <span style={{ color: '#94A3B8' }}>Housekeeping:</span>
+                <span style={{ color: '#4B5563', fontWeight: '500' }}>Housekeeping:</span>
                 <span style={{
-                  fontWeight: '600',
-                  color: room.clean_status === 'clean' || room.clean_status === 'inspected' ? '#34D399' : '#FBBF24',
+                  fontWeight: '700',
+                  color: room.clean_status === 'clean' || room.clean_status === 'inspected' ? '#059669' : '#D97706',
                   textTransform: 'capitalize'
                 }}>
                   {room.clean_status}
@@ -186,10 +190,10 @@ export const FrontDesk = ({ onOpenNewBookingWithRoom, setActiveTab, setSelectedF
                 {isAvailable && (
                   <button 
                     onClick={() => onOpenNewBookingWithRoom(room.id)}
-                    className="btn-gold" 
-                    style={{ flex: 1, padding: '7px 10px', fontSize: '0.8rem' }}
+                    className="btn-amber" 
+                    style={{ flex: 1, padding: '8px 12px', fontSize: '0.82rem' }}
                   >
-                    <LogIn size={14} />
+                    <LogIn size={15} />
                     <span>Assign / Check-In</span>
                   </button>
                 )}
@@ -200,9 +204,9 @@ export const FrontDesk = ({ onOpenNewBookingWithRoom, setActiveTab, setSelectedF
                       setActiveTab('reservations');
                     }}
                     className="btn-ghost" 
-                    style={{ flex: 1, padding: '7px 10px', fontSize: '0.8rem', color: '#38BDF8' }}
+                    style={{ flex: 1, padding: '8px 12px', fontSize: '0.82rem', color: '#2D3A82', borderColor: '#2D3A82' }}
                   >
-                    <Receipt size={14} />
+                    <Receipt size={15} />
                     <span>View Folio / Checkout</span>
                   </button>
                 )}
@@ -211,9 +215,9 @@ export const FrontDesk = ({ onOpenNewBookingWithRoom, setActiveTab, setSelectedF
                   <button 
                     onClick={() => handleStatusChange(room.id, 'clean')}
                     className="btn-emerald"
-                    style={{ flex: 1, padding: '7px 10px', fontSize: '0.8rem' }}
+                    style={{ flex: 1, padding: '8px 12px', fontSize: '0.82rem' }}
                   >
-                    <CheckCircle2 size={14} />
+                    <CheckCircle2 size={15} />
                     <span>Mark Clean</span>
                   </button>
                 )}

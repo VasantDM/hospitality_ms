@@ -93,21 +93,21 @@ export const Housekeeping = () => {
       {/* Title & Navigation */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
         <div>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: '700', margin: 0 }}>Housekeeping & Facilities Maintenance</h2>
-          <p style={{ fontSize: '0.85rem', color: '#94A3B8', margin: '4px 0 0' }}>Cleanliness queue dispatch, room inspection, and repair tickets</p>
+          <h2 style={{ fontSize: '1.6rem', fontWeight: '800', margin: 0, color: '#1F2937' }}>Housekeeping & Facilities Maintenance</h2>
+          <p style={{ fontSize: '0.86rem', color: '#6B7280', margin: '4px 0 0' }}>Cleanliness queue dispatch, room inspection, and repair tickets</p>
         </div>
 
-        <div style={{ display: 'flex', gap: '8px' }}>
+        <div style={{ display: 'flex', gap: '10px' }}>
           <button 
             onClick={() => setActiveTab('tasks')} 
-            className={activeTab === 'tasks' ? 'btn-gold' : 'btn-ghost'}
+            className={activeTab === 'tasks' ? 'btn-amber' : 'btn-ghost'}
           >
             <Sparkles size={16} />
             <span>Cleaning Tasks ({tasks.filter(t => t.status !== 'inspected').length})</span>
           </button>
           <button 
             onClick={() => setActiveTab('maintenance')} 
-            className={activeTab === 'maintenance' ? 'btn-gold' : 'btn-ghost'}
+            className={activeTab === 'maintenance' ? 'btn-amber' : 'btn-ghost'}
           >
             <Wrench size={16} />
             <span>Maintenance Tickets ({maintenance.filter(m => m.status !== 'resolved').length})</span>
@@ -115,7 +115,7 @@ export const Housekeeping = () => {
           <button 
             onClick={() => setShowMaintModal(true)} 
             className="btn-danger"
-            style={{ padding: '8px 14px', fontSize: '0.85rem' }}
+            style={{ padding: '8px 16px', fontSize: '0.85rem' }}
           >
             <Plus size={16} />
             <span>Log Repair Issue</span>
@@ -124,36 +124,36 @@ export const Housekeeping = () => {
       </div>
 
       {activeTab === 'tasks' ? (
-        /* Cleaning Tasks Board */
+        /* Cleaning Tasks Board - Pure Warm White Cards */
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '20px' }}>
           {tasks.map(task => (
-            <div key={task.id} className="glass-card" style={{ padding: '20px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+            <div key={task.id} className="glass-card glass-card-interactive" style={{ padding: '22px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ fontSize: '1.2rem', fontWeight: '800', color: '#F8FAFC' }}>
+                  <span style={{ fontSize: '1.25rem', fontWeight: '800', color: '#1F2937' }}>
                     Room #{task.room?.room_number}
                   </span>
-                  <span style={{ fontSize: '0.78rem', color: '#94A3B8' }}>({task.room?.zone})</span>
+                  <span style={{ fontSize: '0.8rem', color: '#6B7280' }}>({task.room?.zone})</span>
                 </div>
                 <span className={`badge badge-${task.status === 'completed' || task.status === 'inspected' ? 'available' : task.status === 'in_progress' ? 'occupied' : 'dirty'}`}>
                   {task.status.replace('_', ' ')}
                 </span>
               </div>
 
-              <div style={{ fontSize: '0.82rem', color: '#D4AF37', fontWeight: '600', marginBottom: '6px' }}>
+              <div style={{ fontSize: '0.82rem', color: '#2D3A82', fontWeight: '700', marginBottom: '8px' }}>
                 Type: {task.task_type.replace('_', ' ').toUpperCase()} • Priority: {task.priority.toUpperCase()}
               </div>
 
-              <p style={{ fontSize: '0.82rem', color: '#94A3B8', marginBottom: '16px' }}>
-                {task.notes || 'Routine cleaning and towel replenishment.'}
+              <p style={{ fontSize: '0.84rem', color: '#4B5563', marginBottom: '18px', lineHeight: '1.4' }}>
+                {task.notes || 'Routine cleaning and luxury amenity replenishment.'}
               </p>
 
-              <div style={{ display: 'flex', gap: '8px', borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '12px' }}>
+              <div style={{ display: 'flex', gap: '8px', borderTop: '1px solid #E5E9F2', paddingTop: '14px' }}>
                 {task.status === 'pending' && (
                   <button 
                     onClick={() => handleUpdateTaskStatus(task.id, 'in_progress')}
                     className="btn-ghost" 
-                    style={{ flex: 1, fontSize: '0.78rem' }}
+                    style={{ flex: 1, fontSize: '0.8rem' }}
                   >
                     Start Cleaning
                   </button>
@@ -162,7 +162,7 @@ export const Housekeeping = () => {
                   <button 
                     onClick={() => handleUpdateTaskStatus(task.id, 'completed')}
                     className="btn-emerald" 
-                    style={{ flex: 1, fontSize: '0.78rem' }}
+                    style={{ flex: 1, fontSize: '0.8rem' }}
                   >
                     Mark Clean
                   </button>
@@ -170,8 +170,8 @@ export const Housekeeping = () => {
                 {task.status === 'completed' && (
                   <button 
                     onClick={() => handleUpdateTaskStatus(task.id, 'inspected')}
-                    className="btn-gold" 
-                    style={{ flex: 1, fontSize: '0.78rem' }}
+                    className="btn-amber" 
+                    style={{ flex: 1, fontSize: '0.8rem' }}
                   >
                     Supervisor Inspect
                   </button>
@@ -181,12 +181,12 @@ export const Housekeeping = () => {
           ))}
         </div>
       ) : (
-        /* Maintenance Tickets */
+        /* Maintenance Tickets - Pure Warm White Cards */
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '20px' }}>
           {maintenance.map(item => (
-            <div key={item.id} className="glass-card" style={{ padding: '20px', borderLeft: item.status === 'resolved' ? '4px solid #10B981' : '4px solid #F43F5E' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <span style={{ fontWeight: '800', fontSize: '1.1rem', color: '#F8FAFC' }}>
+            <div key={item.id} className="glass-card glass-card-interactive" style={{ padding: '22px', borderLeft: item.status === 'resolved' ? '4px solid #10B981' : '4px solid #EF4444' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                <span style={{ fontWeight: '800', fontSize: '1.15rem', color: '#1F2937' }}>
                   Room #{item.room?.room_number}
                 </span>
                 <span className={`badge badge-${item.status === 'resolved' ? 'available' : 'maintenance'}`}>
@@ -194,19 +194,19 @@ export const Housekeeping = () => {
                 </span>
               </div>
 
-              <h4 style={{ fontSize: '0.95rem', fontWeight: '700', color: '#D4AF37', margin: '0 0 6px 0' }}>
+              <h4 style={{ fontSize: '0.98rem', fontWeight: '800', color: '#2D3A82', margin: '0 0 6px 0' }}>
                 {item.title}
               </h4>
-              <p style={{ fontSize: '0.82rem', color: '#94A3B8', marginBottom: '14px' }}>
-                {item.notes || 'Engineering inspection required.'}
+              <p style={{ fontSize: '0.84rem', color: '#4B5563', marginBottom: '16px', lineHeight: '1.4' }}>
+                {item.notes || 'Engineering inspection dispatched.'}
               </p>
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '10px' }}>
-                <span style={{ fontSize: '0.75rem', color: '#64748B' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #E5E9F2', paddingTop: '12px' }}>
+                <span style={{ fontSize: '0.78rem', color: '#6B7280', fontWeight: '600' }}>
                   Category: {item.category.toUpperCase()}
                 </span>
                 {item.status !== 'resolved' && (
-                  <button onClick={() => handleResolveTicket(item.id)} className="btn-emerald" style={{ padding: '5px 12px', fontSize: '0.78rem' }}>
+                  <button onClick={() => handleResolveTicket(item.id)} className="btn-emerald" style={{ padding: '6px 14px', fontSize: '0.8rem' }}>
                     <CheckCircle2 size={14} />
                     <span>Resolve Issue</span>
                   </button>
@@ -221,12 +221,18 @@ export const Housekeeping = () => {
       {showMaintModal && (
         <div className="modal-overlay" onClick={() => setShowMaintModal(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '480px' }}>
-            <div style={{ padding: '20px 24px', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
-              <h3 style={{ margin: 0, fontSize: '1.2rem' }} className="gold-gradient-text">Log Maintenance Issue</h3>
+            <div style={{ 
+              padding: '20px 24px', 
+              background: 'linear-gradient(90deg, #2D3A82 0%, #1E275E 100%)',
+              color: '#FFFFFF',
+              borderTopLeftRadius: '18px',
+              borderTopRightRadius: '18px'
+            }}>
+              <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#FFFFFF', fontWeight: '800' }}>Log Maintenance Issue</h3>
             </div>
-            <form onSubmit={handleCreateMaintenance} style={{ padding: '24px' }}>
+            <form onSubmit={handleCreateMaintenance} style={{ padding: '24px', background: '#FFFFFF' }}>
               <div style={{ marginBottom: '14px' }}>
-                <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Target Room *</label>
+                <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Target Room *</label>
                 <select className="input-dark" value={maintRoomId} onChange={(e) => setMaintRoomId(e.target.value)}>
                   {rooms.map(r => (
                     <option key={r.id} value={r.id}>Room #{r.room_number} — {r.category?.name}</option>
@@ -235,7 +241,7 @@ export const Housekeeping = () => {
               </div>
 
               <div style={{ marginBottom: '14px' }}>
-                <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Issue Title *</label>
+                <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Issue Title *</label>
                 <input 
                   type="text" 
                   required 
@@ -248,7 +254,7 @@ export const Housekeeping = () => {
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '14px' }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Category</label>
+                  <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Category</label>
                   <select className="input-dark" value={maintCategory} onChange={(e) => setMaintCategory(e.target.value)}>
                     <option value="hvac">HVAC / AC</option>
                     <option value="plumbing">Plumbing</option>
@@ -258,7 +264,7 @@ export const Housekeeping = () => {
                   </select>
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Priority Level</label>
+                  <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Priority Level</label>
                   <select className="input-dark" value={maintPriority} onChange={(e) => setMaintPriority(e.target.value)}>
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
@@ -268,8 +274,8 @@ export const Housekeeping = () => {
                 </div>
               </div>
 
-              <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', fontSize: '0.8rem', color: '#94A3B8', marginBottom: '6px' }}>Notes / Description</label>
+              <div style={{ marginBottom: '22px' }}>
+                <label style={{ display: 'block', fontSize: '0.8rem', color: '#4B5563', marginBottom: '6px', fontWeight: '600' }}>Notes / Description</label>
                 <textarea 
                   rows="3" 
                   className="input-dark" 
@@ -279,9 +285,9 @@ export const Housekeeping = () => {
                 ></textarea>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
                 <button type="button" onClick={() => setShowMaintModal(false)} className="btn-ghost">Cancel</button>
-                <button type="submit" className="btn-gold">Dispatch Ticket</button>
+                <button type="submit" className="btn-amber">Dispatch Ticket</button>
               </div>
             </form>
           </div>
