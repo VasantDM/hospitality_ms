@@ -7,7 +7,9 @@ import {
   Sparkles, 
   Receipt, 
   Globe, 
-  Compass
+  Compass,
+  UserCheck,
+  ChevronRight
 } from 'lucide-react';
 import { useAuth, DEMO_USERS } from '../context/AuthContext';
 
@@ -27,41 +29,41 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
 
   return (
     <aside style={{
-      background: 'linear-gradient(180deg, #2D3A82 0%, #1E275E 100%)',
-      borderRight: '1px solid rgba(255, 255, 255, 0.1)',
+      background: '#FFFFFF',
+      borderRight: '1px solid #E2EFF3',
       height: '100vh',
       display: 'flex',
       flexDirection: 'column',
-      padding: '24px 18px',
+      padding: '24px 16px',
       position: 'sticky',
       top: 0,
       zIndex: 40,
-      boxShadow: '4px 0 20px rgba(45, 58, 130, 0.2)'
+      boxShadow: '2px 0 16px rgba(8, 145, 178, 0.04)'
     }}>
-      {/* Brand Logo */}
+      {/* Brand Logo - Matching Screenshot */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '32px', paddingLeft: '8px' }}>
         <div style={{
           width: '42px',
           height: '42px',
           borderRadius: '12px',
-          background: 'linear-gradient(135deg, #E29578 0%, #D07F60 100%)',
+          background: 'linear-gradient(135deg, #0891B2 0%, #0E7490 100%)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0 4px 14px rgba(226, 149, 120, 0.4)',
+          boxShadow: '0 4px 14px rgba(8, 145, 178, 0.35)',
           color: '#FFFFFF',
           fontWeight: '800',
-          fontSize: '1.2rem',
-          letterSpacing: '0.05em'
+          fontSize: '1.15rem',
+          letterSpacing: '0.04em'
         }}>
           GV
         </div>
         <div>
-          <h1 style={{ fontSize: '1.15rem', fontWeight: '800', letterSpacing: '0.04em', margin: 0, color: '#FFFFFF' }}>
+          <h1 style={{ fontSize: '1.1rem', fontWeight: '800', letterSpacing: '0.02em', margin: 0, color: '#0F172A' }}>
             GRAND VISTA
           </h1>
-          <p style={{ fontSize: '0.72rem', color: '#CBD5E1', margin: 0, letterSpacing: '0.06em', textTransform: 'uppercase', fontWeight: '500' }}>
-            Resort & Hotel PMS
+          <p style={{ fontSize: '0.7rem', color: '#0891B2', margin: 0, letterSpacing: '0.05em', textTransform: 'uppercase', fontWeight: '700' }}>
+            RESORT & HOTEL PMS
           </p>
         </div>
       </div>
@@ -79,47 +81,47 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                padding: '11px 14px',
-                borderRadius: '10px',
-                border: isActive 
-                  ? '1px solid rgba(226, 149, 120, 0.6)' 
-                  : item.highlight 
-                    ? '1px solid rgba(226, 149, 120, 0.4)' 
-                    : '1px solid transparent',
+                padding: '11px 16px',
+                borderRadius: '999px',
+                border: 'none',
                 background: isActive
-                  ? 'rgba(255, 255, 255, 0.16)'
+                  ? '#E2F4F7'
                   : item.highlight 
-                    ? 'rgba(226, 149, 120, 0.12)' 
+                    ? '#F0F9FF' 
                     : 'transparent',
                 color: isActive 
-                  ? '#FFFFFF' 
+                  ? '#0891B2' 
                   : item.highlight 
-                    ? '#FDF3EE' 
-                    : '#CBD5E1',
-                fontWeight: isActive ? '700' : '500',
-                fontSize: '0.9rem',
+                    ? '#0284C7' 
+                    : '#475569',
+                fontWeight: isActive ? '700' : '600',
+                fontSize: '0.88rem',
                 cursor: 'pointer',
-                textAlign: 'left',
                 transition: 'all 0.2s ease',
-                boxShadow: isActive ? '0 4px 12px rgba(0, 0, 0, 0.1)' : 'none'
+                width: '100%',
+                textAlign: 'left'
+              }}
+              onMouseEnter={(e) => {
+                if (!isActive) e.currentTarget.style.background = '#F1F8FA';
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.background = item.highlight ? '#F0F9FF' : 'transparent';
+                }
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <Icon 
-                  size={19} 
-                  color={isActive ? '#E29578' : item.highlight ? '#E29578' : '#CBD5E1'} 
-                />
+                <Icon size={18} color={isActive ? '#0891B2' : item.highlight ? '#0284C7' : '#64748B'} />
                 <span>{item.label}</span>
               </div>
-
               {item.badge && (
                 <span style={{
-                  fontSize: '0.68rem',
+                  fontSize: '0.7rem',
                   padding: '2px 8px',
                   borderRadius: '999px',
-                  background: isActive ? '#E29578' : 'rgba(255, 255, 255, 0.14)',
-                  color: '#FFFFFF',
-                  fontWeight: '700'
+                  fontWeight: '700',
+                  background: isActive ? '#0891B2' : '#E2F4F7',
+                  color: isActive ? '#FFFFFF' : '#0E7490',
                 }}>
                   {item.badge}
                 </span>
@@ -129,52 +131,47 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
         })}
       </nav>
 
-      {/* Role Switcher Widget */}
+      {/* Role Switcher Pill - Matching Screenshot Demo Controls */}
       <div style={{
         marginTop: 'auto',
-        background: 'rgba(255, 255, 255, 0.08)',
-        border: '1px solid rgba(255, 255, 255, 0.14)',
-        borderRadius: '12px',
         padding: '14px',
-        backdropFilter: 'blur(6px)'
+        borderRadius: '16px',
+        background: '#F8FDFF',
+        border: '1px solid #E2EFF3'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
           <img 
-            src={currentUser.avatar} 
-            alt={currentUser.name} 
-            style={{ width: '38px', height: '38px', borderRadius: '50%', objectFit: 'cover', border: '2px solid #E29578' }}
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" 
+            alt="User"
+            style={{ width: '36px', height: '36px', borderRadius: '50%', objectFit: 'cover' }}
           />
-          <div style={{ flex: 1, overflow: 'hidden' }}>
-            <div style={{ fontSize: '0.86rem', fontWeight: '700', color: '#FFFFFF', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-              {currentUser.name}
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontSize: '0.84rem', fontWeight: '700', color: '#0F172A', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              {currentUser?.name || 'Alexander Wright'}
             </div>
-            <div style={{ fontSize: '0.72rem', color: '#E29578', fontWeight: '600', textTransform: 'capitalize' }}>
-              {currentUser.title}
+            <div style={{ fontSize: '0.72rem', color: '#0891B2', fontWeight: '600' }}>
+              {currentUser?.role || 'General Manager'}
             </div>
           </div>
         </div>
 
-        {/* Quick Role Toggle Bar */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '4px' }}>
-          {DEMO_USERS.map((user) => (
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
+          {Object.entries(DEMO_USERS).slice(0, 4).map(([roleKey, u]) => (
             <button
-              key={user.role}
-              title={`Switch role to ${user.title}`}
-              onClick={() => switchDemoRole(user)}
+              key={roleKey}
+              onClick={() => switchDemoRole(roleKey)}
               style={{
-                fontSize: '0.65rem',
-                padding: '4px 0',
-                textAlign: 'center',
+                fontSize: '0.68rem',
+                padding: '5px 8px',
                 borderRadius: '6px',
-                border: currentUser.role === user.role ? '1px solid #E29578' : '1px solid rgba(255, 255, 255, 0.12)',
-                background: currentUser.role === user.role ? 'rgba(226, 149, 120, 0.35)' : 'rgba(255, 255, 255, 0.04)',
-                color: currentUser.role === user.role ? '#FFFFFF' : '#CBD5E1',
-                cursor: 'pointer',
-                fontWeight: '700',
-                textTransform: 'uppercase'
+                border: currentUser?.id === roleKey ? '1px solid #0891B2' : '1px solid #E2EFF3',
+                background: currentUser?.id === roleKey ? '#E2F4F7' : '#FFFFFF',
+                color: currentUser?.id === roleKey ? '#0891B2' : '#64748B',
+                fontWeight: '600',
+                cursor: 'pointer'
               }}
             >
-              {user.role === 'front_desk' ? 'Desk' : user.role === 'housekeeping' ? 'Clean' : user.role}
+              {roleKey.replace('_', ' ')}
             </button>
           ))}
         </div>

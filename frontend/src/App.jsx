@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AuthProvider } from './context/AuthContext';
+import { ToastProvider } from './context/ToastContext';
 import { Sidebar } from './components/Sidebar';
 import { Navbar } from './components/Navbar';
 import { NewBookingModal } from './components/NewBookingModal';
@@ -12,13 +13,41 @@ import { Housekeeping } from './pages/Housekeeping';
 import { BillingFolio } from './pages/BillingFolio';
 import { GuestPortal } from './pages/GuestPortal';
 import { analyticsAPI } from './services/api';
+import { ArrowLeft } from 'lucide-react';
 
 function AppContent() {
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const getInitialTab = () => {
+    const hash = window.location.hash.replace('#', '').trim();
+    if (hash === 'portal' || hash === 'book' || hash === 'guest_portal') return 'guest_portal';
+    if (['dashboard', 'frontdesk', 'rooms', 'reservations', 'pos', 'housekeeping', 'billing'].includes(hash)) {
+      return hash;
+    }
+    return 'dashboard';
+  };
+
+  const [activeTab, setActiveTabState] = useState(getInitialTab);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [initialBookingRoomId, setInitialBookingRoomId] = useState(null);
   const [selectedFolioId, setSelectedFolioId] = useState(null);
-  const [occupancyRate, setOccupancyRate] = useState(78.5);
+  const [occupancyRate, setOccupancyRate] = useState(40.0);
+
+  const setActiveTab = (tab) => {
+    setActiveTabState(tab);
+    window.location.hash = tab;
+  };
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '').trim();
+      if (hash === 'portal' || hash === 'book') {
+        setActiveTabState('guest_portal');
+      } else if (hash && hash !== activeTab) {
+        setActiveTabState(hash);
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [activeTab]);
 
   useEffect(() => {
     loadOccupancy();
@@ -27,7 +56,7 @@ function AppContent() {
   const loadOccupancy = async () => {
     try {
       const res = await analyticsAPI.getKPIs();
-      if (res.data?.occupancy_rate) {
+      if (res.data?.occupancy_rate !== undefined) {
         setOccupancyRate(res.data.occupancy_rate);
       }
     } catch (e) {}
@@ -50,30 +79,30 @@ function AppContent() {
         {/* Floating Switcher to Return to PMS */}
         <div style={{
           position: 'fixed',
-          top: '16px',
-          right: '20px',
+          top: '18px',
+          right: '24px',
           zIndex: 100,
-          background: 'linear-gradient(135deg, #2D3A82 0%, #1E275E 100%)',
-          border: '1px solid #E29578',
+          background: '#FFFFFF',
+          border: '1.5px solid #0891B2',
           borderRadius: '999px',
-          padding: '8px 20px',
-          boxShadow: '0 8px 24px rgba(45, 58, 130, 0.35)'
+          padding: '8px 22px',
+          boxShadow: '0 8px 30px rgba(8, 145, 178, 0.25)'
         }}>
           <button 
             onClick={() => setActiveTab('dashboard')}
             style={{
               background: 'transparent',
               border: 'none',
-              color: '#FFFFFF',
+              color: '#0891B2',
               fontWeight: '700',
-              fontSize: '0.85rem',
+              fontSize: '0.88rem',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '6px'
+              gap: '8px'
             }}
           >
-            <span style={{ color: '#E29578' }}>←</span>
+            <ArrowLeft size={16} />
             <span>Back to Staff PMS</span>
           </button>
         </div>
@@ -88,13 +117,14 @@ function AppContent() {
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {/* Main Content Area */}
-      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#EDF6F9' }}>
         <Navbar 
           onOpenNewBooking={() => { setInitialBookingRoomId(null); setIsBookingModalOpen(true); }}
           occupancyRate={occupancyRate}
+          setActiveTab={setActiveTab}
         />
 
-        <main style={{ flex: 1 }}>
+        <main style={{ flex: 1, padding: '24px 30px' }}>
           {activeTab === 'dashboard' && (
             <Dashboard 
               setActiveTab={setActiveTab} 
@@ -150,7 +180,9 @@ function AppContent() {
 export default function App() {
   return (
     <AuthProvider>
-      <AppContent />
+      <ToastProvider>
+        <AppContent />
+      </ToastProvider>
     </AuthProvider>
   );
 }

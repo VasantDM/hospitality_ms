@@ -12,9 +12,11 @@ import {
   CheckCircle, 
   Filter,
   Sparkles,
-  PlusCircle
+  PlusCircle,
+  Download
 } from 'lucide-react';
 import { reservationsAPI } from '../services/api';
+import { useToast } from '../context/ToastContext';
 
 export const Bookings = ({ onOpenNewBooking, setActiveTab, setSelectedFolioId }) => {
   const [reservations, setReservations] = useState([]);
@@ -22,6 +24,8 @@ export const Bookings = ({ onOpenNewBooking, setActiveTab, setSelectedFolioId })
   const [statusFilter, setStatusFilter] = useState('All');
   const [loading, setLoading] = useState(true);
   const [actionLoadingId, setActionLoadingId] = useState(null);
+
+  const toast = useToast();
 
   useEffect(() => {
     loadReservations();
@@ -43,25 +47,49 @@ export const Bookings = ({ onOpenNewBooking, setActiveTab, setSelectedFolioId })
     try {
       setActionLoadingId(resId);
       await reservationsAPI.checkIn(resId);
+      toast.success('Guest successfully checked in! Room set to Occupied.');
       await loadReservations();
     } catch (err) {
-      alert(err.response?.data?.detail || 'Check-in failed');
+      toast.error(err.response?.data?.detail || 'Check-in failed');
     } finally {
       setActionLoadingId(null);
     }
   };
 
   const handleCheckOut = async (resId) => {
-    if (!window.confirm('Confirm checkout for this guest? Room will be flagged dirty for housekeeping.')) return;
     try {
       setActionLoadingId(resId);
       await reservationsAPI.checkOut(resId);
+      toast.success('Guest checked out. Room flagged dirty & cleaning task dispatched.');
       await loadReservations();
     } catch (err) {
-      alert(err.response?.data?.detail || 'Checkout failed');
+      toast.error(err.response?.data?.detail || 'Checkout failed');
     } finally {
       setActionLoadingId(null);
     }
+  };
+
+  const exportCSV = () => {
+    if (reservations.length === 0) return;
+    const headers = ['Booking Code', 'Guest Name', 'Email', 'Check-In', 'Check-Out', 'Status', 'Total Estimated'];
+    const rows = reservations.map(r => [
+      r.booking_code,
+      `"${r.guest?.first_name} ${r.guest?.last_name}"`,
+      r.guest?.email,
+      r.check_in_date,
+      r.check_out_date,
+      r.status,
+      r.total_estimated
+    ]);
+    const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', `Grand_Vista_Bookings_${new Date().toISOString().split('T')[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    toast.success('Bookings exported to CSV successfully!');
   };
 
   const filtered = reservations.filter(r => {
@@ -76,29 +104,40 @@ export const Bookings = ({ onOpenNewBooking, setActiveTab, setSelectedFolioId })
   });
 
   return (
-    <div style={{ padding: '28px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+      
       {/* Title & Actions */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
         <div>
-          <h2 style={{ fontSize: '1.6rem', fontWeight: '800', margin: 0, color: '#1F2937' }}>Guest Reservations & Front Desk</h2>
-          <p style={{ fontSize: '0.86rem', color: '#6B7280', margin: '4px 0 0' }}>Manage guest check-ins, bookings, stay durations, and folios</p>
+          <h2 style={{ fontSize: '1.6rem', fontWeight: '800', margin: 0, color: '#0F172A' }}>
+            Guest Reservations & Ledger
+          </h2>
+          <p style={{ fontSize: '0.86rem', color: '#64748B', margin: '4px 0 0' }}>
+            Manage guest check-ins, bookings, stay durations, and folios
+          </p>
         </div>
-        <button onClick={onOpenNewBooking} className="btn-amber">
-          <PlusCircle size={16} />
-          <span>New Reservation</span>
-        </button>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <button onClick={exportCSV} className="btn-ghost" title="Export to CSV">
+            <Download size={15} />
+            <span>Export CSV</span>
+          </button>
+          <button onClick={onOpenNewBooking} className="btn-teal">
+            <PlusCircle size={16} />
+            <span>New Reservation</span>
+          </button>
+        </div>
       </div>
 
-      {/* Filter and Search Bar - Pure Warm White Card */}
-      <div className="glass-card" style={{ padding: '16px 20px', marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+      {/* Filter and Search Bar */}
+      <div className="white-card" style={{ padding: '16px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
         {/* Status Filter Buttons */}
         <div style={{ display: 'flex', gap: '8px' }}>
           {['All', 'confirmed', 'checked_in', 'checked_out'].map((st) => (
             <button
               key={st}
               onClick={() => setStatusFilter(st)}
-              className={statusFilter === st ? 'btn-amber' : 'btn-ghost'}
-              style={{ padding: '7px 14px', fontSize: '0.8rem', textTransform: 'capitalize' }}
+              className={statusFilter === st ? 'btn-teal' : 'btn-ghost'}
+              style={{ padding: '7px 16px', fontSize: '0.8rem', textTransform: 'capitalize' }}
             >
               {st.replace('_', ' ')}
             </button>
@@ -107,23 +146,23 @@ export const Bookings = ({ onOpenNewBooking, setActiveTab, setSelectedFolioId })
 
         {/* Search */}
         <div style={{ position: 'relative', width: '280px' }}>
-          <Search size={16} color="#6B7280" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
+          <Search size={16} color="#64748B" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)' }} />
           <input 
             type="text" 
             placeholder="Search by code, guest name..."
-            className="input-dark"
-            style={{ paddingLeft: '36px', height: '36px', fontSize: '0.85rem' }}
+            className="input-clean"
+            style={{ paddingLeft: '38px', height: '38px', fontSize: '0.85rem' }}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
       </div>
 
-      {/* Bookings Table - Pure Warm White Container */}
-      <div className="glass-card" style={{ overflow: 'hidden' }}>
+      {/* Bookings Table */}
+      <div className="white-card" style={{ overflow: 'hidden' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
           <thead>
-            <tr style={{ background: '#F8FAFD', borderBottom: '1px solid #E5E9F2', color: '#4B5563', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: '700' }}>
+            <tr style={{ background: '#F8FDFF', borderBottom: '1px solid #E2EFF3', color: '#475569', fontSize: '0.76rem', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: '700' }}>
               <th style={{ padding: '16px 20px' }}>Booking Code</th>
               <th style={{ padding: '16px 20px' }}>Guest Details</th>
               <th style={{ padding: '16px 20px' }}>Allocated Room(s)</th>
@@ -140,69 +179,51 @@ export const Bookings = ({ onOpenNewBooking, setActiveTab, setSelectedFolioId })
               const isConfirmed = res.status === 'confirmed';
 
               return (
-                <tr key={res.id} style={{ borderBottom: '1px solid #F1F5F9', transition: 'background 0.2s' }}>
-                  <td style={{ padding: '16px 20px' }}>
-                    <span style={{ fontWeight: '800', color: '#2D3A82', letterSpacing: '0.04em' }}>
-                      {res.booking_code}
-                    </span>
-                    <div style={{ fontSize: '0.74rem', color: '#6B7280', marginTop: '2px' }}>
-                      via {res.source.replace('_', ' ')}
-                    </div>
+                <tr key={res.id} style={{ borderBottom: '1px solid #F1F8FA' }}>
+                  <td style={{ padding: '16px 20px', fontWeight: '800', color: '#0891B2' }}>
+                    {res.booking_code}
                   </td>
 
                   <td style={{ padding: '16px 20px' }}>
-                    <div style={{ fontWeight: '700', color: '#1F2937' }}>
+                    <div style={{ fontWeight: '700', color: '#0F172A' }}>
                       {res.guest?.first_name} {res.guest?.last_name}
                     </div>
-                    <div style={{ fontSize: '0.78rem', color: '#6B7280' }}>
-                      {res.guest?.email} • {res.guest?.phone || 'No phone'}
+                    <div style={{ fontSize: '0.78rem', color: '#64748B' }}>
+                      {res.guest?.email} • {res.guest?.phone}
                     </div>
-                    {res.guest?.vip_status !== 'Standard' && (
-                      <span className="badge badge-amber" style={{ marginTop: '4px', fontSize: '0.65rem' }}>
-                        {res.guest?.vip_status}
-                      </span>
-                    )}
                   </td>
 
                   <td style={{ padding: '16px 20px' }}>
-                    {res.reservation_rooms?.map((rr) => (
-                      <div key={rr.id} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <span style={{ fontWeight: '800', color: '#2D3A82' }}>#{rr.room?.room_number}</span>
-                        <span style={{ fontSize: '0.78rem', color: '#4B5563' }}>({rr.room?.category?.name})</span>
+                    {res.reservation_rooms?.map(rr => (
+                      <div key={rr.id} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#F8FDFF', border: '1px solid #E2EFF3', padding: '4px 8px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: '600' }}>
+                        Room #{rr.room?.room_number} ({rr.room?.category?.name})
                       </div>
                     ))}
-                    <div style={{ fontSize: '0.74rem', color: '#6B7280' }}>
-                      {res.adults} Adults, {res.children} Children
-                    </div>
+                  </td>
+
+                  <td style={{ padding: '16px 20px', fontSize: '0.82rem', color: '#475569' }}>
+                    <div><strong>In:</strong> {res.check_in_date}</div>
+                    <div><strong>Out:</strong> {res.check_out_date}</div>
                   </td>
 
                   <td style={{ padding: '16px 20px' }}>
-                    <div style={{ fontSize: '0.84rem', color: '#1F2937', fontWeight: '600' }}>
-                      {res.check_in_date}
-                    </div>
-                    <div style={{ fontSize: '0.76rem', color: '#6B7280' }}>
-                      to {res.check_out_date}
-                    </div>
-                  </td>
-
-                  <td style={{ padding: '16px 20px' }}>
-                    <span className={`badge badge-${res.status === 'checked_in' ? 'occupied' : res.status === 'confirmed' ? 'available' : 'dirty'}`}>
+                    <span className={isCheckedIn ? 'badge-teal' : isConfirmed ? 'badge-amber' : 'badge-teal'}>
                       {res.status.replace('_', ' ')}
                     </span>
                   </td>
 
-                  <td style={{ padding: '16px 20px', fontWeight: '700', color: '#1F2937' }}>
+                  <td style={{ padding: '16px 20px', fontWeight: '800', color: '#0F172A' }}>
                     ${res.total_estimated?.toFixed(2)}
                   </td>
 
                   <td style={{ padding: '16px 20px', textAlign: 'right' }}>
                     <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
                       {isConfirmed && (
-                        <button 
-                          onClick={() => handleCheckIn(res.id)}
+                        <button
                           disabled={isLoading}
-                          className="btn-amber"
-                          style={{ padding: '7px 14px', fontSize: '0.8rem' }}
+                          onClick={() => handleCheckIn(res.id)}
+                          className="btn-teal"
+                          style={{ padding: '6px 14px', fontSize: '0.78rem' }}
                         >
                           <LogIn size={13} />
                           <span>Check In</span>
@@ -210,27 +231,27 @@ export const Bookings = ({ onOpenNewBooking, setActiveTab, setSelectedFolioId })
                       )}
 
                       {isCheckedIn && (
-                        <button 
-                          onClick={() => handleCheckOut(res.id)}
+                        <button
                           disabled={isLoading}
-                          className="btn-danger"
-                          style={{ padding: '7px 14px', fontSize: '0.8rem' }}
+                          onClick={() => handleCheckOut(res.id)}
+                          className="btn-amber-outline"
+                          style={{ padding: '6px 14px', fontSize: '0.78rem' }}
                         >
                           <LogOut size={13} />
                           <span>Check Out</span>
                         </button>
                       )}
 
-                      <button 
+                      <button
                         onClick={() => {
-                          if (setSelectedFolioId) setSelectedFolioId(res.id);
+                          setSelectedFolioId(res.id);
                           setActiveTab('billing');
                         }}
                         className="btn-ghost"
-                        style={{ padding: '7px 12px', fontSize: '0.8rem', color: '#2D3A82', borderColor: '#2D3A82' }}
-                        title="View Guest Folio & Invoices"
+                        style={{ padding: '6px 12px', fontSize: '0.78rem' }}
                       >
-                        <Receipt size={14} />
+                        <Receipt size={13} />
+                        <span>Folio</span>
                       </button>
                     </div>
                   </td>

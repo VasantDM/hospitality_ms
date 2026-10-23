@@ -2,145 +2,145 @@ import React, { useState, useEffect } from 'react';
 import { 
   Search, 
   Bell, 
-  PlusCircle, 
-  CalendarCheck, 
+  Plus, 
+  Calendar, 
   Clock, 
-  Sparkles
+  CheckCircle2,
+  CalendarCheck
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
-export const Navbar = ({ onOpenNewBooking, occupancyRate = 78.5 }) => {
+export const Navbar = ({ onOpenNewBooking, occupancyRate = 40.0, setActiveTab }) => {
   const { currentUser } = useAuth();
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState('');
 
   useEffect(() => {
-    const timer = setInterval(() => setTime(new Date()), 1000);
-    return () => clearInterval(timer);
+    const updateTime = () => {
+      const now = new Date();
+      setTime(now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }));
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <header style={{
-      background: 'linear-gradient(90deg, #2D3A82 0%, #222C66 100%)',
-      borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-      padding: '14px 28px',
+      height: '74px',
+      background: '#EDF6F9',
+      borderBottom: '1px solid #E2EFF3',
+      padding: '0 30px',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
       position: 'sticky',
       top: 0,
-      zIndex: 30,
-      boxShadow: '0 4px 16px rgba(45, 58, 130, 0.15)'
+      zIndex: 30
     }}>
-      {/* Search and Resort Status */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
-        <div style={{
-          position: 'relative',
-          width: '320px'
-        }}>
-          <Search size={17} color="#6B7280" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)' }} />
-          <input 
-            type="text" 
-            placeholder="Search room #, guest name, booking code..."
-            style={{
-              width: '100%',
-              paddingLeft: '40px',
-              paddingRight: '14px',
-              height: '38px',
-              fontSize: '0.85rem',
-              borderRadius: '999px',
-              background: '#FFFFFF',
-              border: '1px solid #E5E7EB',
-              color: '#1F2937',
-              outline: 'none',
-              boxShadow: '0 2px 6px rgba(0,0,0,0.06)'
-            }}
-          />
-        </div>
+      {/* Search Input Pill - Matching Screenshot */}
+      <div style={{ position: 'relative', width: '380px' }}>
+        <Search size={16} color="#64748B" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)' }} />
+        <input 
+          type="text" 
+          placeholder="Search room #, guest name, booking code..." 
+          style={{
+            width: '100%',
+            height: '42px',
+            background: '#FFFFFF',
+            border: '1px solid #E2EFF3',
+            borderRadius: '999px',
+            padding: '0 16px 0 44px',
+            fontSize: '0.86rem',
+            color: '#0F172A',
+            outline: 'none',
+            boxShadow: '0 2px 8px rgba(8, 145, 178, 0.04)'
+          }}
+        />
+      </div>
 
-        {/* Check Availability CTA Chip (Muted Amber) */}
-        <button
-          onClick={onOpenNewBooking}
-          className="cta-chip-solid"
-          title="Instantly check live room matrix and open allocations"
+      {/* Right Controls - Action Chips, Clock, New Reservation Button & Avatar */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+        {/* Check Availability Chip */}
+        <button 
+          onClick={() => setActiveTab && setActiveTab('rooms')}
+          className="action-chip"
         >
-          <CalendarCheck size={14} />
+          <CalendarCheck size={15} color="#0891B2" />
           <span>Check Availability</span>
         </button>
 
-        {/* Live Occupancy Badge */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          background: 'rgba(255, 255, 255, 0.12)',
-          border: '1px solid rgba(255, 255, 255, 0.2)',
-          padding: '6px 14px',
-          borderRadius: '999px',
-          fontSize: '0.8rem',
-          color: '#FFFFFF',
-          fontWeight: '600'
-        }}>
-          <span className="pulse-dot dot-emerald"></span>
-          <span>Occupancy: {occupancyRate}%</span>
-        </div>
-      </div>
-
-      {/* Right Controls: Clock, Actions, User */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-        {/* Live Clock */}
+        {/* Digital Clock Chip */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
           gap: '7px',
-          color: '#E2E8F0',
-          fontSize: '0.82rem',
-          background: 'rgba(255, 255, 255, 0.1)',
+          background: '#E2F4F7',
           padding: '6px 14px',
-          borderRadius: '8px',
-          border: '1px solid rgba(255, 255, 255, 0.15)',
-          fontWeight: '500'
+          borderRadius: '999px',
+          fontSize: '0.82rem',
+          fontWeight: '700',
+          color: '#0E7490',
+          border: '1px solid rgba(8, 145, 178, 0.15)'
         }}>
-          <Clock size={15} color="#E29578" />
-          <span>{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</span>
+          <Clock size={14} color="#0891B2" />
+          <span>{time || '05:54:00 PM'}</span>
         </div>
 
-        {/* New Reservation Button (Muted Amber) */}
+        {/* New Reservation Solid Teal Button */}
         <button 
           onClick={onOpenNewBooking}
-          className="btn-amber"
-          style={{ padding: '8px 18px', fontSize: '0.85rem' }}
+          className="btn-teal"
+          style={{ height: '40px', padding: '0 20px', gap: '6px' }}
         >
-          <PlusCircle size={16} />
+          <Plus size={16} />
           <span>New Reservation</span>
         </button>
 
         {/* Notification Bell */}
         <button style={{
-          background: 'rgba(255, 255, 255, 0.1)',
-          border: '1px solid rgba(255, 255, 255, 0.18)',
           width: '38px',
           height: '38px',
           borderRadius: '50%',
+          background: '#FFFFFF',
+          border: '1px solid #E2EFF3',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           cursor: 'pointer',
-          color: '#FFFFFF',
           position: 'relative'
         }}>
-          <Bell size={17} />
+          <Bell size={17} color="#0891B2" />
           <span style={{
             position: 'absolute',
             top: '8px',
             right: '8px',
             width: '7px',
             height: '7px',
-            background: '#E29578',
             borderRadius: '50%',
-            boxShadow: '0 0 6px #E29578'
-          }}></span>
+            background: '#22D3EE',
+            boxShadow: '0 0 6px #22D3EE'
+          }} />
         </button>
+
+        {/* User Profile */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', paddingLeft: '6px' }}>
+          <img 
+            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80" 
+            alt="Profile"
+            style={{ width: '38px', height: '38px', borderRadius: '50%', objectFit: 'cover', border: '1.5px solid #0891B2' }}
+          />
+          <div style={{ lineHeight: '1.2' }}>
+            <div style={{ fontSize: '0.86rem', fontWeight: '700', color: '#0F172A' }}>
+              {currentUser?.name || 'Alexander Wright'}
+            </div>
+            <div style={{ fontSize: '0.72rem', color: '#64748B', fontWeight: '500' }}>
+              {currentUser?.role || 'General Manager'}
+            </div>
+          </div>
+        </div>
       </div>
     </header>
   );
 };
+
+export default Navbar;
