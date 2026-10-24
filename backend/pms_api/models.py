@@ -12,6 +12,7 @@ class RoomCategory(models.Model):
     bed_type = models.CharField(max_length=50, default="King Bed")
     amenities = models.TextField(default="WiFi, AC, Smart TV, Mini Bar, Safe, Balcony")
     image_url = models.URLField(max_length=500, blank=True, null=True)
+    gallery_images = models.JSONField(default=list, blank=True)
 
     class Meta:
         verbose_name_plural = "Room Categories"

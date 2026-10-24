@@ -46,6 +46,25 @@ def room_categories(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET', 'PATCH', 'PUT', 'DELETE'])
+def room_category_detail_update(request, pk):
+    try:
+        cat = RoomCategory.objects.get(pk=pk)
+    except RoomCategory.DoesNotExist:
+        return Response({'detail': 'Room category not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        return Response(RoomCategorySerializer(cat).data)
+    elif request.method in ['PATCH', 'PUT']:
+        serializer = RoomCategorySerializer(cat, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':
+        cat.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 @api_view(['GET', 'POST'])
 def rooms_list_create(request):
     if request.method == 'GET':

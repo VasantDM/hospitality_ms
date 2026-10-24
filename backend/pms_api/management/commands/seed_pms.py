@@ -33,7 +33,13 @@ class Command(BaseCommand):
                     capacity_children=1,
                     bed_type="1 King Bed",
                     amenities="Private Balcony, Ocean View, Mini-Bar, Jacuzzi, High-speed WiFi, 65' OLED TV, Espresso Machine",
-                    image_url="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80"
+                    image_url="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80",
+                    gallery_images=[
+                        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
+                        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80",
+                        "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
+                        "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80"
+                    ]
                 ),
                 RoomCategory(
                     name="Luxury Private Pool Villa",
@@ -44,7 +50,14 @@ class Command(BaseCommand):
                     capacity_children=2,
                     bed_type="2 King Beds",
                     amenities="Private Plunge Pool, Butler Service, Sun Deck, Outdoor Shower, Floating Breakfast, Wine Cellar, Bose Sound System",
-                    image_url="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80"
+                    image_url="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80",
+                    gallery_images=[
+                        "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80",
+                        "https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200&q=80",
+                        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+                        "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
+                        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
+                    ]
                 ),
                 RoomCategory(
                     name="Hilltop Garden Villa",
@@ -55,7 +68,13 @@ class Command(BaseCommand):
                     capacity_children=1,
                     bed_type="1 King + 1 Daybed",
                     amenities="Garden View, Sun Loungers, Rain Shower, Yoga Mat, Organic Toiletries, Smart Home Climate Control",
-                    image_url="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80"
+                    image_url="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80",
+                    gallery_images=[
+                        "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80",
+                        "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80",
+                        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+                        "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80"
+                    ]
                 ),
                 RoomCategory(
                     name="Executive Resort Suite",
@@ -66,7 +85,13 @@ class Command(BaseCommand):
                     capacity_children=1,
                     bed_type="1 King Bed",
                     amenities="Work Desk, High-speed Fiber, Lounge Sofa, Nespresso Bar, Walk-in Closet, 24/7 In-room Dining",
-                    image_url="https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80"
+                    image_url="https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80",
+                    gallery_images=[
+                        "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=80",
+                        "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=80",
+                        "https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1200&q=80",
+                        "https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=1200&q=80"
+                    ]
                 ),
                 RoomCategory(
                     name="Presidential Penthouse",
@@ -77,7 +102,13 @@ class Command(BaseCommand):
                     capacity_children=3,
                     bed_type="3 King Suites",
                     amenities="Rooftop Terrace, Private Elevator, Dedicated Chef & Butler, Cinema Room, Sauna, Grand Piano",
-                    image_url="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=800&q=80"
+                    image_url="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=800&q=80",
+                    gallery_images=[
+                        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1200&q=80",
+                        "https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1200&q=80",
+                        "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1200&q=80",
+                        "https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=1200&q=80"
+                    ]
                 ),
             ]
             RoomCategory.objects.bulk_create(categories)

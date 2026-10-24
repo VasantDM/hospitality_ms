@@ -26,7 +26,9 @@ export const authAPI = {
 
 export const roomsAPI = {
   getCategories: () => api.get('/rooms/categories'),
+  getCategory: (id) => api.get(`/rooms/categories/${id}`),
   createCategory: (data) => api.post('/rooms/categories', data),
+  updateCategory: (id, data) => api.patch(`/rooms/categories/${id}`, data),
   getRooms: (params) => api.get('/rooms', { params }),
   getRoom: (id) => api.get(`/rooms/${id}`),
   createRoom: (data) => api.post('/rooms', data),

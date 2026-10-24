@@ -8,9 +8,21 @@ from .models import (
 )
 
 class RoomCategorySerializer(serializers.ModelSerializer):
+    all_images = serializers.SerializerMethodField()
+
     class Meta:
         model = RoomCategory
         fields = '__all__'
+
+    def get_all_images(self, obj):
+        imgs = []
+        if obj.image_url:
+            imgs.append(obj.image_url)
+        if isinstance(obj.gallery_images, list):
+            for img in obj.gallery_images:
+                if img and img not in imgs:
+                    imgs.append(img)
+        return imgs
 
 class RoomSerializer(serializers.ModelSerializer):
     category = RoomCategorySerializer(read_only=True)
