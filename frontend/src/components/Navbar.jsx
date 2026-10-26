@@ -125,7 +125,7 @@ export const Navbar = ({ onOpenNewBooking, occupancyRate = 40.0, setActiveTab })
         {/* User Profile */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', paddingLeft: '6px' }}>
           <img 
-            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80" 
+            src={currentUser?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"} 
             alt="Profile"
             style={{ width: '38px', height: '38px', borderRadius: '50%', objectFit: 'cover', border: '1.5px solid #0891B2' }}
           />
@@ -134,7 +134,7 @@ export const Navbar = ({ onOpenNewBooking, occupancyRate = 40.0, setActiveTab })
               {currentUser?.name || 'Alexander Wright'}
             </div>
             <div style={{ fontSize: '0.72rem', color: '#64748B', fontWeight: '500' }}>
-              {currentUser?.role || 'General Manager'}
+              {currentUser?.title || currentUser?.role || 'General Manager'}
             </div>
           </div>
         </div>

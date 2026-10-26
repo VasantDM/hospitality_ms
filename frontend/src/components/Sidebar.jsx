@@ -131,7 +131,7 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
         })}
       </nav>
 
-      {/* Role Switcher Pill - Matching Screenshot Demo Controls */}
+      {/* Staff Profile & Active Duty Shift */}
       <div style={{
         marginTop: 'auto',
         padding: '14px',
@@ -139,41 +139,82 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
         background: '#F8FDFF',
         border: '1px solid #E2EFF3'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-          <img 
-            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" 
-            alt="User"
-            style={{ width: '36px', height: '36px', borderRadius: '50%', objectFit: 'cover' }}
-          />
+        {/* User Info with Active Shift Indicator */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+          <div style={{ position: 'relative' }}>
+            <img 
+              src={currentUser?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80"} 
+              alt={currentUser?.name || "Staff"}
+              style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover', border: '2px solid #0891B2' }}
+            />
+            <span style={{
+              position: 'absolute',
+              bottom: 0,
+              right: 0,
+              width: '10px',
+              height: '10px',
+              borderRadius: '50%',
+              background: '#10B981',
+              border: '2px solid #FFFFFF'
+            }} title="On Duty" />
+          </div>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontSize: '0.84rem', fontWeight: '700', color: '#0F172A', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            <div style={{ fontSize: '0.86rem', fontWeight: '800', color: '#0F172A', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
               {currentUser?.name || 'Alexander Wright'}
             </div>
-            <div style={{ fontSize: '0.72rem', color: '#0891B2', fontWeight: '600' }}>
-              {currentUser?.role || 'General Manager'}
+            <div style={{ fontSize: '0.72rem', color: '#0891B2', fontWeight: '700' }}>
+              {currentUser?.title || currentUser?.role || 'General Manager'}
             </div>
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
-          {Object.entries(DEMO_USERS).slice(0, 4).map(([roleKey, u]) => (
-            <button
-              key={roleKey}
-              onClick={() => switchDemoRole(roleKey)}
-              style={{
-                fontSize: '0.68rem',
-                padding: '5px 8px',
-                borderRadius: '6px',
-                border: currentUser?.id === roleKey ? '1px solid #0891B2' : '1px solid #E2EFF3',
-                background: currentUser?.id === roleKey ? '#E2F4F7' : '#FFFFFF',
-                color: currentUser?.id === roleKey ? '#0891B2' : '#64748B',
-                fontWeight: '600',
-                cursor: 'pointer'
-              }}
-            >
-              {roleKey.replace('_', ' ')}
-            </button>
-          ))}
+        {/* Duty Shift Switcher */}
+        <div>
+          <label style={{ display: 'block', fontSize: '0.68rem', fontWeight: '700', color: '#64748B', textTransform: 'uppercase', marginBottom: '5px' }}>
+            Switch Staff Duty / Persona
+          </label>
+          <select
+            value={currentUser?.email}
+            onChange={(e) => switchDemoRole(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '7px 10px',
+              borderRadius: '8px',
+              border: '1px solid #CBD5E1',
+              background: '#FFFFFF',
+              color: '#0F172A',
+              fontSize: '0.76rem',
+              fontWeight: '600',
+              cursor: 'pointer',
+              outline: 'none'
+            }}
+          >
+            {DEMO_USERS.map((u) => (
+              <option key={u.email} value={u.email}>
+                {u.name} — {u.title}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Shift Details & System Indicator */}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginTop: '10px',
+          paddingTop: '8px',
+          borderTop: '1px solid #E2EFF3',
+          fontSize: '0.72rem',
+          color: '#64748B'
+        }}>
+          <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#10B981', display: 'inline-block' }} />
+            Shift A • Active
+          </span>
+          <span style={{ color: '#0891B2', fontWeight: '700', fontSize: '0.7rem' }}>
+            Grand Vista PMS
+          </span>
         </div>
       </div>
     </aside>

@@ -38,8 +38,13 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(DEMO_USERS[0]);
   const [loading, setLoading] = useState(false);
 
-  const switchDemoRole = (userObj) => {
-    setCurrentUser(userObj);
+  const switchDemoRole = (userOrEmail) => {
+    if (typeof userOrEmail === 'string') {
+      const found = DEMO_USERS.find(u => u.email === userOrEmail || u.role === userOrEmail);
+      if (found) setCurrentUser(found);
+    } else if (userOrEmail && typeof userOrEmail === 'object') {
+      setCurrentUser(userOrEmail);
+    }
   };
 
   return (
