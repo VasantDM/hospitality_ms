@@ -18,7 +18,7 @@ class RoomCategory(models.Model):
         verbose_name_plural = "Room Categories"
 
     def __str__(self):
-        return f"{self.name} (${self.base_price}/night)"
+        return f"{self.name} (₹{self.base_price}/night)"
 
 
 class Room(models.Model):
@@ -123,7 +123,7 @@ class FolioItem(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.description} (${self.total_amount})"
+        return f"{self.description} (₹{self.total_amount})"
 
 
 class Payment(models.Model):
@@ -135,7 +135,7 @@ class Payment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Payment ${self.amount} via {self.payment_method}"
+        return f"Payment ₹{self.amount} via {self.payment_method}"
 
 
 # ----------------- RESTAURANT & POS -----------------
@@ -173,7 +173,7 @@ class MenuItem(models.Model):
     image_url = models.URLField(max_length=500, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.name} (${self.price})"
+        return f"{self.name} (₹{self.price})"
 
 
 class RestaurantOrder(models.Model):
@@ -191,7 +191,7 @@ class RestaurantOrder(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.order_number} (${self.total_amount})"
+        return f"{self.order_number} (₹{self.total_amount})"
 
 
 class OrderItem(models.Model):

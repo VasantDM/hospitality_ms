@@ -5,7 +5,7 @@ import {
   Plus, 
   Printer, 
   CheckCircle, 
-  DollarSign, 
+  IndianRupee, 
   Calendar, 
   User, 
   ShieldCheck, 
@@ -103,7 +103,7 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
         notes: 'Settlement at front desk'
       });
       setShowPaymentModal(false);
-      toast.success(`Payment of $${payAmount} recorded successfully!`);
+      toast.success(`Payment of ₹${payAmount} recorded successfully!`);
       loadFolio(selectedResId);
     } catch (err) {
       toast.error(err.response?.data?.detail || 'Payment failed');
@@ -234,7 +234,7 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
                     <td style={{ padding: '14px 16px', color: '#64748B', textTransform: 'capitalize' }}>{item.category.replace('_', ' ')}</td>
                     <td style={{ padding: '14px 16px', color: '#64748B' }}>{item.quantity}</td>
                     <td style={{ padding: '14px 16px', color: '#0F172A', fontWeight: '700', textAlign: 'right' }}>
-                      ${item.total_amount?.toFixed(2)}
+                      ₹{item.total_amount?.toFixed(2)}
                     </td>
                   </tr>
                 ))}
@@ -264,7 +264,7 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
                       </td>
                       <td style={{ padding: '12px 16px', color: '#64748B' }}>{p.transaction_ref}</td>
                       <td style={{ padding: '12px 16px', color: '#10B981', fontWeight: '700', textAlign: 'right' }}>
-                        -${p.amount?.toFixed(2)}
+                        -₹{p.amount?.toFixed(2)}
                       </td>
                     </tr>
                   ))
@@ -290,11 +290,11 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.88rem', marginBottom: '20px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span style={{ color: '#64748B' }}>Total Debits (Gross):</span>
-                  <strong style={{ color: '#0F172A' }}>${currentFolio.total_charges?.toFixed(2)}</strong>
+                  <strong style={{ color: '#0F172A' }}>₹{currentFolio.total_charges?.toFixed(2)}</strong>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span style={{ color: '#64748B' }}>Total Credits Paid:</span>
-                  <strong style={{ color: '#10B981' }}>-${currentFolio.total_payments?.toFixed(2)}</strong>
+                  <strong style={{ color: '#10B981' }}>-₹{currentFolio.total_payments?.toFixed(2)}</strong>
                 </div>
                 <div style={{
                   display: 'flex',
@@ -306,7 +306,7 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
                 }}>
                   <span style={{ color: '#0F172A' }}>Balance Due:</span>
                   <span style={{ color: currentFolio.balance_due > 0 ? '#F97316' : '#10B981' }}>
-                    ${currentFolio.balance_due?.toFixed(2)}
+                    ₹{currentFolio.balance_due?.toFixed(2)}
                   </span>
                 </div>
               </div>
@@ -317,7 +317,7 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
                   className="btn-teal"
                   style={{ width: '100%', padding: '12px', fontSize: '0.92rem' }}
                 >
-                  <DollarSign size={16} /> <span>Settle Balance (${currentFolio.balance_due.toFixed(2)})</span>
+                  <IndianRupee size={16} /> <span>Settle Balance (₹{currentFolio.balance_due.toFixed(2)})</span>
                 </button>
               ) : (
                 <div style={{
@@ -344,12 +344,12 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
                   Scan dynamic UPI QR Code to settle folio balance
                 </p>
                 <img 
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi://pay?pa=grandvista@upi%26am=${currentFolio.balance_due.toFixed(2)}%26cu=USD`}
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi://pay?pa=grandvista@upi%26am=${currentFolio.balance_due.toFixed(2)}%26cu=INR`}
                   alt="UPI QR Code" 
                   style={{ width: '130px', height: '130px', margin: '0 auto 8px', borderRadius: '8px', border: '1px solid #E2EFF3' }}
                 />
                 <div style={{ fontSize: '0.82rem', fontWeight: '700', color: '#0891B2' }}>
-                  ${currentFolio.balance_due.toFixed(2)} USD
+                  ₹{currentFolio.balance_due.toFixed(2)} INR
                 </div>
               </div>
             )}
@@ -412,14 +412,14 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
 
               <div>
                 <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: '700', color: '#0F172A', marginBottom: '6px' }}>
-                  Amount ($) *
+                  Amount (₹) *
                 </label>
                 <input 
                   type="number" 
                   step="0.01"
                   required
                   className="input-clean"
-                  placeholder="e.g. 150.00"
+                  placeholder="e.g. 1500.00"
                   value={chargeAmount}
                   onChange={(e) => setChargeAmount(e.target.value)}
                 />
@@ -457,7 +457,7 @@ export const BillingFolio = ({ selectedFolioId = null }) => {
             <form onSubmit={handleProcessPayment} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               <div>
                 <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: '700', color: '#0F172A', marginBottom: '6px' }}>
-                  Settlement Amount ($) *
+                  Settlement Amount (₹) *
                 </label>
                 <input 
                   type="number" 

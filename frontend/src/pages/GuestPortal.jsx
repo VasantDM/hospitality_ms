@@ -419,7 +419,7 @@ export const GuestPortal = ({ onBookingSuccess }) => {
 
             <div style={{ textAlign: 'right' }}>
               <div style={{ fontSize: '2.2rem', fontWeight: '800', color: '#0891B2', lineHeight: 1 }}>
-                ${selectedDetailCategory.base_price}
+                ₹{selectedDetailCategory.base_price}
                 <span style={{ fontSize: '0.9rem', color: '#64748B', fontWeight: '500' }}> / night</span>
               </div>
               <span style={{ fontSize: '0.82rem', color: '#64748B' }}>
@@ -806,7 +806,7 @@ export const GuestPortal = ({ onBookingSuccess }) => {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '20px' }}>
                   <div>
                     <span style={{ fontSize: '2.4rem', fontWeight: '800', color: '#0891B2' }}>
-                      ${selectedDetailCategory.base_price}
+                      ₹{selectedDetailCategory.base_price}
                     </span>
                     <span style={{ fontSize: '0.85rem', color: '#64748B' }}> / night</span>
                   </div>
@@ -865,19 +865,19 @@ export const GuestPortal = ({ onBookingSuccess }) => {
                 {/* Price Breakdown */}
                 <div style={{ background: '#F8FDFF', borderRadius: '14px', border: '1px solid #E2EFF3', padding: '16px', marginBottom: '22px', fontSize: '0.86rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', color: '#64748B' }}>
-                    <span>${selectedDetailCategory.base_price} × {nights} night(s)</span>
-                    <strong style={{ color: '#0F172A' }}>${(selectedDetailCategory.base_price * nights).toFixed(2)}</strong>
+                    <span>₹{selectedDetailCategory.base_price} × {nights} night(s)</span>
+                    <strong style={{ color: '#0F172A' }}>₹{(selectedDetailCategory.base_price * nights).toFixed(2)}</strong>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', color: '#64748B' }}>
                     <span>Resort Services & Taxes (12%)</span>
-                    <strong style={{ color: '#0F172A' }}>${(selectedDetailCategory.base_price * nights * 0.12).toFixed(2)}</strong>
+                    <strong style={{ color: '#0F172A' }}>₹{(selectedDetailCategory.base_price * nights * 0.12).toFixed(2)}</strong>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '10px', borderTop: '1px solid #E2EFF3', fontSize: '1.05rem' }}>
                     <strong style={{ color: '#0F172A' }}>Total Estimated:</strong>
-                    <strong style={{ color: '#0891B2' }}>${(selectedDetailCategory.base_price * nights * 1.12).toFixed(2)} USD</strong>
+                    <strong style={{ color: '#0891B2' }}>₹{(selectedDetailCategory.base_price * nights * 1.12).toFixed(2)} INR</strong>
                   </div>
                   <div style={{ fontSize: '0.74rem', color: '#059669', marginTop: '6px', textAlign: 'right', fontWeight: '600' }}>
-                    20% advance guarantee required: ${(selectedDetailCategory.base_price * nights * 0.2).toFixed(2)}
+                    20% advance guarantee required: ₹{(selectedDetailCategory.base_price * nights * 0.2).toFixed(2)}
                   </div>
                 </div>
 
@@ -1329,11 +1329,11 @@ export const GuestPortal = ({ onBookingSuccess }) => {
                       <div style={{ marginTop: 'auto', paddingTop: '18px', borderTop: '1px solid #E2EFF3', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <div>
                           <div style={{ fontSize: '1.5rem', fontWeight: '800', color: '#0891B2', lineHeight: 1.1 }}>
-                            ${cat.base_price}
+                            ₹{cat.base_price}
                             <span style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: '500' }}> / night</span>
                           </div>
                           <div style={{ fontSize: '0.76rem', color: '#94A3B8', marginTop: '3px' }}>
-                            ${totalEstimated} total for {nights} night(s)
+                            ₹{totalEstimated} total for {nights} night(s)
                           </div>
                         </div>
 
@@ -1581,7 +1581,7 @@ export const GuestPortal = ({ onBookingSuccess }) => {
                       </div>
                       <div>
                         <span style={{ color: '#64748B', display: 'block', fontSize: '0.74rem' }}>Estimated Total:</span>
-                        <strong style={{ color: '#0891B2' }}>${lookupResult.total_estimated?.toFixed(2)} USD</strong>
+                        <strong style={{ color: '#0891B2' }}>₹{lookupResult.total_estimated?.toFixed(2)} INR</strong>
                       </div>
                       <div>
                         <span style={{ color: '#64748B', display: 'block', fontSize: '0.74rem' }}>Source:</span>
@@ -1780,7 +1780,7 @@ export const GuestPortal = ({ onBookingSuccess }) => {
                   Reserve {selectedCategory.name}
                 </h3>
                 <p style={{ fontSize: '0.85rem', color: '#64748B', margin: '0 0 22px' }}>
-                  {nights} Night(s) Stay • Estimated Total: <strong style={{ color: '#0891B2' }}>${(selectedCategory.base_price * nights * 1.12).toFixed(2)}</strong> (incl. 12% Resort Tax)
+                  {nights} Night(s) Stay • Estimated Total: <strong style={{ color: '#0891B2' }}>₹{(selectedCategory.base_price * nights * 1.12).toFixed(2)}</strong> (incl. 12% Resort Tax)
                 </p>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '22px' }}>
@@ -1916,12 +1916,12 @@ export const GuestPortal = ({ onBookingSuccess }) => {
                   {paymentOption === 'upi' && (
                     <div style={{ textAlign: 'center', padding: '16px', background: '#F8FDFF', borderRadius: '14px', border: '1px solid #E2EFF3' }}>
                       <img 
-                        src={`https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi://pay?pa=grandvista@upi%26am=${(selectedCategory.base_price * nights * 0.2).toFixed(2)}%26cu=USD`}
+                        src={`https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=upi://pay?pa=grandvista@upi%26am=${(selectedCategory.base_price * nights * 0.2).toFixed(2)}%26cu=INR`}
                         alt="UPI QR Code" 
                         style={{ width: '130px', height: '130px', margin: '0 auto 8px', borderRadius: '8px' }}
                       />
                       <p style={{ fontSize: '0.76rem', color: '#64748B', margin: 0 }}>
-                        Scan to guarantee your reservation with a 20% advance deposit: <strong>${(selectedCategory.base_price * nights * 0.2).toFixed(2)}</strong>
+                        Scan to guarantee your reservation with a 20% advance deposit: <strong>₹{(selectedCategory.base_price * nights * 0.2).toFixed(2)}</strong>
                       </p>
                     </div>
                   )}
@@ -1971,7 +1971,7 @@ export const GuestPortal = ({ onBookingSuccess }) => {
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', paddingTop: '10px', borderTop: '1px solid #E2EFF3' }}>
                     <span style={{ color: '#64748B', fontSize: '0.84rem' }}>Total Folio Charges:</span>
-                    <strong style={{ color: '#0891B2', fontSize: '1.05rem' }}>${confirmedBooking.total_estimated?.toFixed(2)} USD</strong>
+                    <strong style={{ color: '#0891B2', fontSize: '1.05rem' }}>₹{confirmedBooking.total_estimated?.toFixed(2)} INR</strong>
                   </div>
                 </div>
 

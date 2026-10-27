@@ -213,7 +213,7 @@ export const Bookings = ({ onOpenNewBooking, setActiveTab, setSelectedFolioId })
                   </td>
 
                   <td style={{ padding: '16px 20px', fontWeight: '800', color: '#0F172A' }}>
-                    ${res.total_estimated?.toFixed(2)}
+                    ₹{res.total_estimated?.toFixed(2)}
                   </td>
 
                   <td style={{ padding: '16px 20px', textAlign: 'right' }}>

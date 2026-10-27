@@ -4,7 +4,7 @@ import {
   Plus, 
   Sparkles, 
   Check, 
-  DollarSign, 
+  IndianRupee, 
   Users, 
   Home, 
   X, 
@@ -286,7 +286,7 @@ export const RoomsInventory = () => {
                     {cat.name}
                   </h3>
                   <span style={{ fontSize: '1.35rem', fontWeight: '800', color: '#0891B2' }}>
-                    ${cat.base_price}
+                    ₹{cat.base_price}
                     <span style={{ fontSize: '0.75rem', color: '#64748B', fontWeight: '500' }}> / nt</span>
                   </span>
                 </div>
@@ -411,7 +411,7 @@ export const RoomsInventory = () => {
                 </div>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.78rem', color: '#0F172A', marginBottom: '6px', fontWeight: '700' }}>
-                    Nightly Rate ($) *
+                    Nightly Rate (₹) *
                   </label>
                   <input 
                     type="number" 
@@ -689,7 +689,7 @@ export const RoomsInventory = () => {
                 <label style={{ display: 'block', fontSize: '0.78rem', color: '#0F172A', marginBottom: '6px', fontWeight: '700' }}>Room Category *</label>
                 <select className="input-clean" value={selectedCategoryId} onChange={(e) => setSelectedCategoryId(e.target.value)}>
                   {categories.map(c => (
-                    <option key={c.id} value={c.id}>{c.name} (${c.base_price}/night)</option>
+                    <option key={c.id} value={c.id}>{c.name} (₹{c.base_price}/night)</option>
                   ))}
                 </select>
               </div>

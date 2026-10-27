@@ -224,7 +224,7 @@ class Command(BaseCommand):
             )
 
             folio1 = Folio.objects.create(reservation=res1, guest=guest1, status="open")
-            FolioItem.objects.create(folio=folio1, description="Deluxe Ocean Suite (4 Nights @ $280)", category="room_charge", amount=1120.0, quantity=1, total_amount=1120.0)
+            FolioItem.objects.create(folio=folio1, description="Deluxe Ocean Suite (4 Nights @ ₹280)", category="room_charge", amount=1120.0, quantity=1, total_amount=1120.0)
             FolioItem.objects.create(folio=folio1, description="Resort Occupancy Tax & Service (12%)", category="tax", amount=134.4, quantity=1, total_amount=134.4)
             FolioItem.objects.create(folio=folio1, description="Sunset Terrace Dining: Chilean Sea Bass & Wine", category="restaurant", amount=84.5, quantity=1, total_amount=84.5)
             Payment.objects.create(folio=folio1, amount=600.0, payment_method="credit_card", transaction_ref="TXN-VISA-9921", notes="Advance deposit at check-in")

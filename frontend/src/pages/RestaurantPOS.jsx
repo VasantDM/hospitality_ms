@@ -259,7 +259,7 @@ export const RestaurantPOS = ({ setActiveTab }) => {
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #E2EFF3', paddingTop: '12px' }}>
                     <span style={{ fontWeight: '800', color: '#0891B2', fontSize: '1.15rem' }}>
-                      ${item.price.toFixed(2)}
+                      ₹{item.price.toFixed(2)}
                     </span>
                     <span style={{ fontSize: '0.78rem', color: '#64748B', display: 'flex', alignItems: 'center', gap: '4px' }}>
                       <Clock size={13} color="#F97316" /> {item.prep_time_minutes}m
@@ -357,7 +357,7 @@ export const RestaurantPOS = ({ setActiveTab }) => {
                   <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid #F1F8FA' }}>
                     <div style={{ flex: 1 }}>
                       <div style={{ fontSize: '0.88rem', fontWeight: '700', color: '#0F172A' }}>{item.name}</div>
-                      <div style={{ fontSize: '0.78rem', color: '#0891B2', fontWeight: '700' }}>${item.price.toFixed(2)} each</div>
+                      <div style={{ fontSize: '0.78rem', color: '#0891B2', fontWeight: '700' }}>₹{item.price.toFixed(2)} each</div>
                     </div>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -374,15 +374,15 @@ export const RestaurantPOS = ({ setActiveTab }) => {
             <div style={{ borderTop: '1px solid #E2EFF3', paddingTop: '14px', marginBottom: '18px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: '#64748B', marginBottom: '5px' }}>
                 <span>Subtotal</span>
-                <span style={{ fontWeight: '600', color: '#0F172A' }}>${subtotal.toFixed(2)}</span>
+                <span style={{ fontWeight: '600', color: '#0F172A' }}>₹{subtotal.toFixed(2)}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: '#64748B', marginBottom: '8px' }}>
                 <span>F&B Tax (8%)</span>
-                <span style={{ fontWeight: '600', color: '#0F172A' }}>${tax.toFixed(2)}</span>
+                <span style={{ fontWeight: '600', color: '#0F172A' }}>₹{tax.toFixed(2)}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.25rem', fontWeight: '800', color: '#0891B2', borderTop: '1px solid #E2EFF3', paddingTop: '8px' }}>
                 <span>Total Due</span>
-                <span>${total.toFixed(2)}</span>
+                <span>₹{total.toFixed(2)}</span>
               </div>
             </div>
 
@@ -421,7 +421,7 @@ export const RestaurantPOS = ({ setActiveTab }) => {
                   {ord.items?.map(it => (
                     <div key={it.id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.86rem', padding: '6px 0', borderBottom: '1px dashed #E2EFF3' }}>
                       <span style={{ color: '#0F172A', fontWeight: '600' }}>{it.quantity}x {it.menu_item?.name}</span>
-                      <span style={{ color: '#0891B2', fontWeight: '700' }}>${(it.unit_price * it.quantity).toFixed(2)}</span>
+                      <span style={{ color: '#0891B2', fontWeight: '700' }}>₹{(it.unit_price * it.quantity).toFixed(2)}</span>
                     </div>
                   ))}
                 </div>

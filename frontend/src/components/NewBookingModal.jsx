@@ -192,7 +192,7 @@ export const NewBookingModal = ({ isOpen, onClose, onSuccess, initialRoomId = nu
             >
               {rooms.map(r => (
                 <option key={r.id} value={r.id}>
-                  Room {r.room_number} — {r.category?.name} (${r.category?.base_price}/night) • {r.zone}
+                  Room {r.room_number} — {r.category?.name} (₹{r.category?.base_price}/night) • {r.zone}
                 </option>
               ))}
             </select>
@@ -264,16 +264,16 @@ export const NewBookingModal = ({ isOpen, onClose, onSuccess, initialRoomId = nu
             marginBottom: '20px'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.84rem', color: '#64748B', marginBottom: '4px' }}>
-              <span>{nights} Night(s) × ${ratePerNight}</span>
-              <span style={{ color: '#0F172A', fontWeight: '600' }}>${roomTotal.toFixed(2)}</span>
+              <span>{nights} Night(s) × ₹{ratePerNight}</span>
+              <span style={{ color: '#0F172A', fontWeight: '600' }}>₹{roomTotal.toFixed(2)}</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.84rem', color: '#64748B', marginBottom: '8px' }}>
               <span>Resort Occupancy Tax & Service (12%)</span>
-              <span style={{ color: '#0F172A', fontWeight: '600' }}>${tax.toFixed(2)}</span>
+              <span style={{ color: '#0F172A', fontWeight: '600' }}>₹{tax.toFixed(2)}</span>
             </div>
             <div style={{ borderTop: '1px solid #E2EFF3', paddingTop: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ color: '#0891B2', fontWeight: '800' }}>Estimated Total:</span>
-              <span style={{ color: '#0891B2', fontSize: '1.25rem', fontWeight: '800' }}>${grandTotal.toFixed(2)}</span>
+              <span style={{ color: '#0891B2', fontSize: '1.25rem', fontWeight: '800' }}>₹{grandTotal.toFixed(2)}</span>
             </div>
           </div>
 

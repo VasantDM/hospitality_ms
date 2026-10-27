@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   TrendingUp, 
   BedDouble, 
-  DollarSign, 
+  IndianRupee, 
   Users, 
   Sparkles, 
   CalendarCheck, 
@@ -205,14 +205,14 @@ export const Dashboard = ({ setActiveTab, onOpenNewBooking }) => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
             <span style={{ fontSize: '0.84rem', fontWeight: '700', color: '#64748B' }}>ADR (Avg Daily Rate)</span>
             <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: '#E0F2FE', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <DollarSign size={15} color="#0891B2" />
+              <IndianRupee size={15} color="#0891B2" />
             </div>
           </div>
           <div style={{ fontSize: '2rem', fontWeight: '800', color: '#0F172A', lineHeight: '1.1', marginBottom: '8px' }}>
-            ${kpis?.adr || 175}
+            ₹{kpis?.adr || 175}
           </div>
           <div style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: '600' }}>
-            Monthly Target: $190.00
+            Monthly Target: ₹190.00
           </div>
         </div>
 
@@ -225,7 +225,7 @@ export const Dashboard = ({ setActiveTab, onOpenNewBooking }) => {
             </div>
           </div>
           <div style={{ fontSize: '2rem', fontWeight: '800', color: '#F97316', lineHeight: '1.1', marginBottom: '8px' }}>
-            ${kpis?.revpar || 125}
+            ₹{kpis?.revpar || 125}
           </div>
           <div style={{ fontSize: '0.78rem', color: '#64748B', fontWeight: '600' }}>
             Revenue / Avail. Room
@@ -241,7 +241,7 @@ export const Dashboard = ({ setActiveTab, onOpenNewBooking }) => {
             </div>
           </div>
           <div style={{ fontSize: '2rem', fontWeight: '800', color: '#0F172A', lineHeight: '1.1', marginBottom: '8px' }}>
-            ${kpis?.restaurant_sales_today || 0}
+            ₹{kpis?.restaurant_sales_today || 0}
           </div>
           <div style={{ fontSize: '0.78rem', color: '#0891B2', fontWeight: '700' }}>
             Master Folio Direct Route
@@ -286,7 +286,7 @@ export const Dashboard = ({ setActiveTab, onOpenNewBooking }) => {
                     <div style={{ display: 'flex', alignItems: 'flex-end', gap: '4px', height: '140px' }}>
                       {/* Room Bar (Teal Gradient) */}
                       <div 
-                        title={`Rooms: $${item.room_revenue}`}
+                        title={`Rooms: ₹${item.room_revenue}`}
                         style={{
                           width: '14px',
                           height: `${roomHeight}px`,
@@ -298,7 +298,7 @@ export const Dashboard = ({ setActiveTab, onOpenNewBooking }) => {
                       />
                       {/* Dining Bar (Amber) */}
                       <div 
-                        title={`F&B: $${item.fnb_revenue}`}
+                        title={`F&B: ₹${item.fnb_revenue}`}
                         style={{
                           width: '10px',
                           height: `${fnbHeight}px`,
@@ -575,7 +575,7 @@ export const Dashboard = ({ setActiveTab, onOpenNewBooking }) => {
             <div style={{ background: '#F8FDFF', border: '1px solid #E2EFF3', borderRadius: '12px', padding: '14px', marginBottom: '24px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '8px' }}>
                 <span style={{ color: '#64748B' }}>Estimated Room Revenue Post:</span>
-                <strong style={{ color: '#0F172A' }}>${kpis?.adr * occupiedRooms || 1050}.00</strong>
+                <strong style={{ color: '#0F172A' }}>₹{kpis?.adr * occupiedRooms || 1050}.00</strong>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
                 <span style={{ color: '#64748B' }}>Occupancy Lock:</span>
